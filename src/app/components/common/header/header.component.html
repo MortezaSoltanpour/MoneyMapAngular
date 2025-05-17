@@ -17,9 +17,42 @@
   </a>
 
   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-    <li><a href="#" class="nav-link px-2 link-secondary">Dashboard</a></li>
-    <li><a href="#" class="nav-link px-2 link-dark">Category</a></li>
-    <li><a href="#" class="nav-link px-2 link-dark">Transaction</a></li>
+    <li>
+      <a
+        [routerLink]="['/financial/dashboard']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link px-2 link-secondary"
+        >Dashboard</a
+      >
+    </li>
+    <li>
+      <a
+        [routerLink]="['financial/categories']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link px-2 link-dark"
+        >Category</a
+      >
+    </li>
+    <li>
+      <a
+        [routerLink]="['financial/transactions']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link px-2 link-dark"
+        >Transaction</a
+      >
+    </li>
+    <li>
+      <a
+        [routerLink]="['financial/users']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link px-2 link-dark"
+        >Users</a
+      >
+    </li>
   </ul>
 
   <div class="col-md-3 text-end">
