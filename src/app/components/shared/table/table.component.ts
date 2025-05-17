@@ -1,8 +1,9 @@
+import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table',
-  imports: [],
+  imports: [NgFor],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
