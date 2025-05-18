@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-category-edit',
   imports: [],
   templateUrl: './category-edit.component.html',
-  styleUrl: './category-edit.component.css'
 })
-export class CategoryEditComponent {
-
-}
+export class CategoryEditComponent {}
