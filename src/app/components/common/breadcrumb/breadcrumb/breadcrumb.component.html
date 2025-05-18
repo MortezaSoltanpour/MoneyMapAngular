@@ -1,0 +1,14 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" *ngFor="let item of breadCrumbList">
+      <ng-container *ngIf="item.link; else noLink">
+        <a [routerLink]="[item.link]" routerLinkActive="active">
+          {{ item.title }}
+        </a>
+      </ng-container>
+      <ng-template #noLink>
+        <span class="text-muted">{{ item.title }}</span>
+      </ng-template>
+    </li>
+  </ol>
+</nav>

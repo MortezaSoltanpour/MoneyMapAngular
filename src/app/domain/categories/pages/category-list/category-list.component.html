@@ -1,6 +1,17 @@
+<app-breadcrumb
+  [breadCrumbList]="[
+    { title: 'Dashboard', link: 'financial/categories' },
+    { title: 'Categories', link: '' }
+  ]"
+></app-breadcrumb>
+
 <div
   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
 >
   <h1 class="h2">Categories</h1>
+  <button class="btn btn-success">
+    <i class="bi bi-plus-circle"></i>
+    Add Category
+  </button>
 </div>
 <app-table [columns]="userTableColumns" [data]="userTableData"> </app-table>

@@ -4,10 +4,11 @@ import {
   userSampleTableColumns,
   userSampleTableData,
 } from '../../../../shared/models/sampledata';
+import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-category-list',
-  imports: [TableComponent],
+  imports: [TableComponent, BreadcrumbComponent],
   templateUrl: './category-list.component.html',
 })
 export class CategoryListComponent {
