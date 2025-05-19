@@ -1,1 +1,11 @@
-<p>category-create works!</p>
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
+>
+  <h1 class="h2">{{ title }}</h1>
+</div>
+<app-breadcrumb
+  [breadCrumbList]="[
+    { title: 'Categories', link: '/financial/categories' },
+    { title: title, link: '' }
+  ]"
+></app-breadcrumb>

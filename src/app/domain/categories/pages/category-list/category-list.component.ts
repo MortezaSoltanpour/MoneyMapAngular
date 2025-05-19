@@ -5,10 +5,11 @@ import {
   userSampleTableData,
 } from '../../../../shared/models/sampledata';
 import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-category-list',
-  imports: [TableComponent, BreadcrumbComponent],
+  imports: [TableComponent, BreadcrumbComponent, RouterModule],
   templateUrl: './category-list.component.html',
 })
 export class CategoryListComponent {

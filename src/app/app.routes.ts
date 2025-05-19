@@ -5,6 +5,7 @@ import { CategoryListComponent } from './domain/categories/pages/category-list/c
 import { DashboardComponent } from './domain/dashboard/pages/dashboard/dashboard.component';
 import { TransactionListComponent } from './domain/transactions/pages/transaction-list/transaction-list.component';
 import { UserListComponent } from './domain/users/pages/user-list/user-list.component';
+import { CategoryCreateComponent } from './domain/categories/pages/category-create/category-create.component';
 
 export const routes: Routes = [
   { component: LoginComponent, path: '' },
@@ -19,6 +20,10 @@ export const routes: Routes = [
       {
         component: CategoryListComponent,
         path: 'categories',
+      },
+      {
+        component: CategoryCreateComponent,
+        path: 'categories/create',
       },
       {
         component: TransactionListComponent,
