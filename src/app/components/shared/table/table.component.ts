@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class TableComponent {
   @Input() columns: { key: string; label: string }[] = [];
   @Input() data: any[] = [];
+  index = 1;
 }
