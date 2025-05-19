@@ -4,7 +4,7 @@ export interface ApiResponse<T> {
   isSuccess: boolean;
   errorMessages: string;
   statusCode: number;
-  payLoad: {};
+  payLoad: T;
   pageCount: number;
   pageNumber: number;
   totalItems: number;

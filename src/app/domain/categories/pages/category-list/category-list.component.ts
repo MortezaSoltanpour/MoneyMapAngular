@@ -25,18 +25,19 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.service.get().subscribe({
       next: (response) => {
-        console.group('Get data from category');
-        console.table(response);
-        console.groupEnd();
+        this.categories = response.payLoad;
       },
       error: (error) => {
         console.log(error);
       },
     });
   }
-  userTableColumns = userSampleTableColumns;
-  userTableData = userSampleTableData;
+  categoriesTableColumns = [
+    { key: 'title', label: 'Title' },
+    { key: 'isInput', label: 'Type' },
+  ];
+
   title = 'Categories';
 
-  // categories: categoryDto[];
+  categories: categoryDto[] = [];
 }
