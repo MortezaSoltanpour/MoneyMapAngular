@@ -1,14 +1,35 @@
-@if(control?.invalid && (control?.touched || control?.dirty)){
-<div>
-  @if(control?.errors?.['required']){
-  <span class="text-danger"> {{ label }} is required </span>
-  } @if(control?.errors?.['maxlength']){
-  <span class="text-danger">
+<div *ngIf="control?.invalid && (control?.touched || control?.dirty)">
+  <div class="text-danger" *ngIf="control?.errors?.['required']">
+    {{ label }} is required.
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors?.['minlength']">
+    Minimum length for {{ label }} is
+    {{ control?.errors?.['minlength']?.requiredLength }} characters.
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors?.['maxlength']">
     Maximum length for {{ label }} is
     {{ control?.errors?.['maxlength']?.requiredLength }} characters.
-  </span>
-  } @if(control?.errors?.['minLength']){
-  <span class="text-danger"> Min Length exceeded </span>
-  }
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors?.['email']">
+    Please enter a valid email address.
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors?.['pattern']">
+    Invalid format for {{ label }}.
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors?.['min']">
+    Minimum value for {{ label }} is {{ control?.errors?.['min']?.min }}.
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors?.['max']">
+    Maximum value for {{ label }} is {{ control?.errors?.['max']?.max }}.
+  </div>
+
+  <div class="text-danger" *ngIf="control?.errors && unknownError()">
+    Invalid value for {{ label }}.
+  </div>
 </div>
-}
