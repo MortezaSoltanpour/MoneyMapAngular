@@ -1,4 +1,4 @@
-<app-main-title [showAddBtn]="true" [title]="'Create'"> </app-main-title>
+<app-main-title [showAddBtn]="false" [title]="'Create'"> </app-main-title>
 
 <app-breadcrumb
   [breadCrumbList]="[
@@ -7,18 +7,23 @@
   ]"
 ></app-breadcrumb>
 
-<form>
+<form [formGroup]="pageForm">
   <div class="row">
     <div class="col-md-6">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Title</label>
         <input
+          formControlName="title"
           class="form-control"
           id="title"
           name="title"
           aria-describedby="emailHelp"
         />
       </div>
+      <app-validation-messages
+        [control]="pageForm.get('title')"
+        label="Title"
+      ></app-validation-messages>
     </div>
 
     <div class="col-md-6">
@@ -27,7 +32,7 @@
           <label for="exampleInputPassword1" class="form-label"
             >Type of transaction</label
           >
-          <select type="password" class="form-control">
+          <select formControlName="type" type="password" class="form-control">
             <option value="false">Expenses</option>
             <option value="true">Income</option>
           </select>
