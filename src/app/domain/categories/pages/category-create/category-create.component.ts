@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MainTitleComponent } from '../../../../components/common/main-title/main-title.component';
 import {
   FormControl,
@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { categoryDto } from '../../models/categoryDtos';
+import { categoryDto, categoryModel } from '../../models/categoryDtos';
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
 import { CategoryServicesService } from '../../services/category-services.service';
 
@@ -25,7 +25,10 @@ import { CategoryServicesService } from '../../services/category-services.servic
   templateUrl: './category-create.component.html',
 })
 export class CategoryCreateComponent {
-  constructor(private service: CategoryServicesService) {}
+  constructor(
+    private service: CategoryServicesService,
+    private router: Router
+  ) {}
   title = 'Create';
 
   pageForm = new FormGroup({
@@ -33,9 +36,7 @@ export class CategoryCreateComponent {
     IsInput: new FormControl(false, [Validators.required]),
   });
 
-  catData: categoryDto = {
-    IdCategory: '',
-    DateRegistered: new Date(),
+  catData: categoryModel = {
     IsInput: false,
     Title: '',
   };
@@ -47,12 +48,11 @@ export class CategoryCreateComponent {
       return;
     }
     const formData = this.pageForm.value;
-    console.table(formData);
     this.catData.IsInput = formData.IsInput ? formData.IsInput : false;
     this.catData.Title = formData.Title ? formData.Title : '';
     this.service.add(this.catData).subscribe({
       next: (response) => {
-        console.log(response);
+        this.router.navigate(['/financial/categories']);
       },
       error: (error) => {
         console.log(error);

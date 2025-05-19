@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiAddresses } from '../../../shared/apiAddress';
 import { ApiResponse } from '../../../shared/models/api-response';
-import { categoryDto } from '../models/categoryDtos';
+import { categoryDto, categoryModel } from '../models/categoryDtos';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,15 +17,10 @@ export class CategoryServicesService {
     );
   }
 
-  sampleData = {
-    title: 'string',
-    isInput: true,
-  };
-
-  add(data: categoryDto) {
+  add(data: categoryModel) {
     return this.httpClient.post(
       `${ApiAddresses.category}${ApiAddresses.add}`,
-      this.sampleData
+      data
     );
   }
 }
