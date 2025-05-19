@@ -6,4 +6,6 @@ import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/br
   imports: [BreadcrumbComponent],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent {}
+export class DashboardComponent {
+  title = 'Dashboard';
+}

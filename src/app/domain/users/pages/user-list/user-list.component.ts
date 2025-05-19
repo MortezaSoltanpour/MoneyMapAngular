@@ -14,4 +14,6 @@ import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/br
 export class UserListComponent {
   userTableColumns = userSampleTableColumns;
   userTableData = userSampleTableData;
+
+  title = 'Users';
 }

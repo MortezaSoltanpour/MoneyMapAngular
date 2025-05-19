@@ -14,4 +14,5 @@ import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/br
 export class TransactionListComponent {
   userTableColumns = userSampleTableColumns;
   userTableData = userSampleTableData;
+  title = 'Transactions';
 }
