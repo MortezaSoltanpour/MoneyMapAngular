@@ -1,11 +1,43 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
->
-  <h1 class="h2">{{ title }}</h1>
-</div>
+<app-main-title [showAddBtn]="true" [title]="'Create'"> </app-main-title>
+
 <app-breadcrumb
   [breadCrumbList]="[
     { title: 'Categories', link: '/financial/categories' },
     { title: title, link: '' }
   ]"
 ></app-breadcrumb>
+
+<form>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Title</label>
+        <input
+          class="form-control"
+          id="title"
+          name="title"
+          aria-describedby="emailHelp"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Type of transaction</label
+          >
+          <select type="password" class="form-control">
+            <option value="false">Expenses</option>
+            <option value="true">Income</option>
+          </select>
+          <div class="form-text">
+            Is this type of transaction income or expense?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success">Submit</button>
+</form>
