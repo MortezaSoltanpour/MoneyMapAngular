@@ -16,4 +16,16 @@ export class CategoryServicesService {
       `${ApiAddresses.category}${ApiAddresses.all}`
     );
   }
+
+  sampleData = {
+    title: 'string',
+    isInput: true,
+  };
+
+  add(data: categoryDto) {
+    return this.httpClient.post(
+      `${ApiAddresses.category}${ApiAddresses.add}`,
+      this.sampleData
+    );
+  }
 }

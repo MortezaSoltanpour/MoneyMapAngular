@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { categoryDto } from '../../models/categoryDtos';
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
+import { CategoryServicesService } from '../../services/category-services.service';
 
 @Component({
   selector: 'app-category-create',
@@ -24,12 +25,20 @@ import { ValidationMessagesComponent } from '../../../../components/shared/valid
   templateUrl: './category-create.component.html',
 })
 export class CategoryCreateComponent {
+  constructor(private service: CategoryServicesService) {}
   title = 'Create';
 
   pageForm = new FormGroup({
     Title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     IsInput: new FormControl(false, [Validators.required]),
   });
+
+  catData: categoryDto = {
+    IdCategory: '',
+    DateRegistered: new Date(),
+    IsInput: false,
+    Title: '',
+  };
 
   handleSubmit() {
     if (this.pageForm.invalid) {
@@ -39,6 +48,17 @@ export class CategoryCreateComponent {
     }
     const formData = this.pageForm.value;
     console.table(formData);
+    this.catData.IsInput = formData.IsInput ? formData.IsInput : false;
+    this.catData.Title = formData.Title ? formData.Title : '';
+    this.service.add(this.catData).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+
     this.pageForm.reset({
       IsInput: false,
     });
