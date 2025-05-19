@@ -1,4 +1,6 @@
 export interface categoryDto {
-  title: string;
-  type: boolean;
+  IdCategory: string;
+  Title: string;
+  IsInput: boolean;
+  DateRegistered: Date;
 }

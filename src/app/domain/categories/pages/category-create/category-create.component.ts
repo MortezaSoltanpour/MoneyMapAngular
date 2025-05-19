@@ -25,16 +25,19 @@ import { ValidationMessagesComponent } from '../../../../components/shared/valid
 })
 export class CategoryCreateComponent {
   title = 'Create';
-  categoryForm: categoryDto = {
-    title: '',
-    type: false,
-  };
 
   pageForm = new FormGroup({
-    title: new FormControl(this.categoryForm.title, [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    type: new FormControl(this.categoryForm.type),
+    Title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    IsInput: new FormControl(false),
   });
+
+  handleSubmit() {
+    if (this.pageForm.invalid) {
+      this.pageForm.markAllAsTouched();
+      console.error('Model is not valid');
+      return;
+    }
+    const formData = this.pageForm.value;
+    console.table(formData);
+  }
 }

@@ -7,18 +7,12 @@
   ]"
 ></app-breadcrumb>
 
-<form [formGroup]="pageForm">
+<form [formGroup]="pageForm" (ngSubmit)="handleSubmit()">
   <div class="row">
     <div class="col-md-6">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Title</label>
-        <input
-          formControlName="title"
-          class="form-control"
-          id="title"
-          name="title"
-          aria-describedby="emailHelp"
-        />
+        <label for="Title" class="form-label">Title</label>
+        <input formControlName="Title" class="form-control" />
       </div>
       <app-validation-messages
         [control]="pageForm.get('title')"
@@ -29,10 +23,12 @@
     <div class="col-md-6">
       <div class="mb-3">
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label"
-            >Type of transaction</label
+          <label for="IsInput" class="form-label">Type of transaction</label>
+          <select
+            formControlName="IsInput"
+            type="password"
+            class="form-control"
           >
-          <select formControlName="type" type="password" class="form-control">
             <option value="false">Expenses</option>
             <option value="true">Income</option>
           </select>
@@ -44,5 +40,5 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success">Submit</button>
 </form>
