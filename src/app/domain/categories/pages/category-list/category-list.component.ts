@@ -23,10 +23,15 @@ import { CategoryServicesService } from '../../services/category-services.servic
 export class CategoryListComponent implements OnInit {
   constructor(private service: CategoryServicesService) {}
   ngOnInit(): void {
-    var cates = this.service.get().subscribe((response) => {
-      console.group('Get data from category');
-      console.table(response);
-      console.groupEnd();
+    this.service.get().subscribe({
+      next: (response) => {
+        console.group('Get data from category');
+        console.table(response);
+        console.groupEnd();
+      },
+      error: (error) => {
+        console.log(error);
+      },
     });
   }
   userTableColumns = userSampleTableColumns;
