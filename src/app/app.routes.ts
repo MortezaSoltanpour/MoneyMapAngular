@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 import { AdminContainerComponent } from './pages/layout/admin-container/admin-container.component';
 import { LoginComponent } from './pages/login/login.component';
-import { CategoryListComponent } from './domain/categories/pages/category-list/category-list.component';
-import { DashboardComponent } from './domain/dashboard/pages/dashboard/dashboard.component';
-import { TransactionListComponent } from './domain/transactions/pages/transaction-list/transaction-list.component';
-import { UserListComponent } from './domain/users/pages/user-list/user-list.component';
-import { CategoryCreateComponent } from './domain/categories/pages/category-create/category-create.component';
+import { categoriesRoutes } from './domain/categories/categories.routes';
+import { transactionRoutes } from './domain/transactions/transactions.routes';
+import { dashboardRoutes } from './domain/dashboard/dashboard.routes';
+import { usersRoutes } from './domain/users/users.routes';
 
 export const routes: Routes = [
   { component: LoginComponent, path: '' },
@@ -14,24 +13,20 @@ export const routes: Routes = [
     path: 'financial',
     children: [
       {
-        component: DashboardComponent,
         path: 'dashboard',
+        children: dashboardRoutes,
       },
       {
-        component: CategoryListComponent,
         path: 'categories',
+        children: categoriesRoutes,
       },
       {
-        component: CategoryCreateComponent,
-        path: 'categories/create',
-      },
-      {
-        component: TransactionListComponent,
         path: 'transactions',
+        children: transactionRoutes,
       },
       {
-        component: UserListComponent,
         path: 'users',
+        children: usersRoutes,
       },
     ],
   },
