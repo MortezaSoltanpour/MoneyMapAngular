@@ -1,9 +1,10 @@
 export interface categoryModel {
-  Title: string;
-  IsInput: boolean;
+  title: string;
+  isInput: boolean;
 }
 
 export interface categoryDto extends categoryModel {
-  IdCategory: string;
-  DateRegistered: Date;
+  idCategory: string;
+  dateRegistered: Date;
+  type: string;
 }

@@ -37,8 +37,8 @@ export class CategoryCreateComponent {
   });
 
   catData: categoryModel = {
-    IsInput: false,
-    Title: '',
+    isInput: false,
+    title: '',
   };
 
   handleSubmit() {
@@ -48,8 +48,8 @@ export class CategoryCreateComponent {
       return;
     }
     const formData = this.pageForm.value;
-    this.catData.IsInput = formData.IsInput ? formData.IsInput : false;
-    this.catData.Title = formData.Title ? formData.Title : '';
+    this.catData.isInput = formData.IsInput ? formData.IsInput : false;
+    this.catData.title = formData.Title ? formData.Title : '';
     this.service.add(this.catData).subscribe({
       next: (response) => {
         this.router.navigate(['/financial/categories']);

@@ -25,7 +25,11 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.service.get().subscribe({
       next: (response) => {
-        this.categories = response.payLoad;
+        console.log(response);
+        this.categories = response.payLoad.map((category) => ({
+          ...category,
+          Type: category.isInput ? 'Income' : 'Expense',
+        }));
       },
       error: (error) => {
         console.log(error);
@@ -34,7 +38,7 @@ export class CategoryListComponent implements OnInit {
   }
   categoriesTableColumns = [
     { key: 'title', label: 'Title' },
-    { key: 'isInput', label: 'Type' },
+    { key: 'Type', label: 'Type' },
   ];
 
   title = 'Categories';
