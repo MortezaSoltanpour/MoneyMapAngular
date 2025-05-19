@@ -3,6 +3,10 @@ import { CategoryListComponent } from './pages/category-list/category-list.compo
 import { CategoryCreateComponent } from './pages/category-create/category-create.component';
 
 export const categoriesRoutes: Routes = [
-  { path: '', component: CategoryListComponent },
-  { path: 'create', component: CategoryCreateComponent },
+  { path: '', component: CategoryListComponent, data: { title: 'Categories' } },
+  {
+    path: 'create',
+    component: CategoryCreateComponent,
+    data: { title: 'Create' },
+  },
 ];

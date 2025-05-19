@@ -7,7 +7,11 @@ import { dashboardRoutes } from './domain/dashboard/dashboard.routes';
 import { usersRoutes } from './domain/users/users.routes';
 
 export const routes: Routes = [
-  { component: LoginComponent, path: '' },
+  {
+    component: LoginComponent,
+    path: '',
+    data: { title: 'Financial management Moneymap | Login' },
+  },
   {
     component: AdminContainerComponent,
     path: 'financial',
