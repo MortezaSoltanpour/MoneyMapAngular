@@ -28,7 +28,7 @@ export class CategoryCreateComponent {
 
   pageForm = new FormGroup({
     Title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-    IsInput: new FormControl(false),
+    IsInput: new FormControl(false, [Validators.required]),
   });
 
   handleSubmit() {
@@ -39,5 +39,8 @@ export class CategoryCreateComponent {
     }
     const formData = this.pageForm.value;
     console.table(formData);
+    this.pageForm.reset({
+      IsInput: false,
+    });
   }
 }
