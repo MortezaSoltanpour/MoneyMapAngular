@@ -1,12 +1,5 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
->
-  <h1 class="h2">{{ title }}</h1>
-  <a class="btn btn-success">
-    <i class="bi bi-plus-circle"></i>
-    Add New
-  </a>
-</div>
+<app-main-title [showAddBtn]="true" [title]="'Users'"></app-main-title>
+
 <app-breadcrumb [breadCrumbList]="[{ title: title, link: '' }]">
 </app-breadcrumb>
 <app-table [columns]="userTableColumns" [data]="userTableData"> </app-table>

@@ -1,0 +1,16 @@
+<div
+  class="border-bottom d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
+>
+  <h1 class="h2">{{ title }}</h1>
+  @if(showAddBtn){
+  <a
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active"
+    routerLink="/financial/{{ parent.toLowerCase() }}/create"
+    class="btn btn-success"
+  >
+    <i class="bi bi-plus-circle"></i>
+    Add New
+  </a>
+  }
+</div>
