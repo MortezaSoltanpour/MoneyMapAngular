@@ -6,3 +6,15 @@
     { title: title, link: '' }
   ]"
 ></app-breadcrumb>
+
+<div class="row">
+  <div class="col-md-4">
+    Title:
+    {{ category.title }}
+  </div>
+  <div class="col-md-4">
+    Type :
+    <span class="text-success" *ngIf="category.isInput">Income</span>
+    <span class="text-warning" *ngIf="!category.isInput">Expense</span>
+  </div>
+</div>

@@ -17,6 +17,12 @@ export class CategoryServicesService {
     );
   }
 
+  getOne(id: string): Observable<ApiResponse<categoryDto>> {
+    return this.httpClient.get<ApiResponse<categoryDto>>(
+      `${ApiAddresses.category}${ApiAddresses.details}?id=${id}`
+    );
+  }
+
   add(data: categoryModel) {
     return this.httpClient.post(
       `${ApiAddresses.category}${ApiAddresses.add}`,

@@ -19,10 +19,6 @@ export class CategoryListComponent implements OnInit {
     this.service.get().subscribe({
       next: (response) => {
         this.categories = response.payLoad;
-        // this.categories = response.payLoad.map((category) => ({
-        //   ...category,
-        //   Type: category.isInput ? 'Income' : 'Expense',
-        // }));
       },
       error: (error) => {
         console.log(error);
