@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableComponent } from '../../../../components/shared/table/table.component';
-import {
-  userSampleTableColumns,
-  userSampleTableData,
-} from '../../../../shared/models/sampledata';
+
 import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
 import { MainTitleComponent } from '../../../../components/common/main-title/main-title.component';
@@ -25,7 +22,6 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.service.get().subscribe({
       next: (response) => {
-        console.log(response);
         this.categories = response.payLoad.map((category) => ({
           ...category,
           Type: category.isInput ? 'Income' : 'Expense',

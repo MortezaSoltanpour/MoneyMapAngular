@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { categoryDto, categoryModel } from '../../models/categoryDtos';
+import { categoryModel } from '../../models/categoryDtos';
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
 import { CategoryServicesService } from '../../services/category-services.service';
 

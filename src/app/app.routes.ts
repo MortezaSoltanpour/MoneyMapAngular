@@ -25,14 +25,17 @@ export const routes: Routes = [
       {
         path: 'categories',
         children: categoriesRoutes,
+        canActivate: [authGuard],
       },
       {
         path: 'transactions',
         children: transactionRoutes,
+        canActivate: [authGuard],
       },
       {
         path: 'users',
         children: usersRoutes,
+        canActivate: [authGuard],
       },
     ],
   },
