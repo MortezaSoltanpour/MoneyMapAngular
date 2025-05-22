@@ -3,4 +3,37 @@
 <app-breadcrumb
   [breadCrumbList]="[{ title: title, link: '' }]"
 ></app-breadcrumb>
-<app-table [columns]="categoriesTableColumns" [data]="categories"> </app-table>
+
+<table class="table table-hover table-striped table-bordered">
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Title</td>
+      <td>Type</td>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of categories; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.title }}</td>
+      <td>
+        <span class="text-success" *ngIf="item.isInput">Income</span>
+        <span class="text-warning" *ngIf="!item.isInput">Expense</span>
+      </td>
+      <th>
+        <a routerLink="/financial/categories/details/{{ item.idCategory }}">
+          <i class="text-primary bi bi-info-circle"></i>
+        </a>
+        |
+        <a routerLink="/financial/categories/edit/{{ item.idCategory }}">
+          <i class="text-warning bi bi-pencil"></i>
+        </a>
+        |
+        <a routerLink="/financial/categories/delete/{{ item.idCategory }}">
+          <i class="text-danger bi bi-trash"></i>
+        </a>
+      </th>
+    </tr>
+  </tbody>
+</table>

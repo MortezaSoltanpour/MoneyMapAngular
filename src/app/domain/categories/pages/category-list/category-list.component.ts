@@ -6,15 +6,11 @@ import { RouterModule } from '@angular/router';
 import { MainTitleComponent } from '../../../../components/common/main-title/main-title.component';
 import { categoryDto } from '../../models/categoryDtos';
 import { CategoryServicesService } from '../../services/category-services.service';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-category-list',
-  imports: [
-    TableComponent,
-    BreadcrumbComponent,
-    RouterModule,
-    MainTitleComponent,
-  ],
+  imports: [NgIf, BreadcrumbComponent, RouterModule, MainTitleComponent, NgFor],
   templateUrl: './category-list.component.html',
 })
 export class CategoryListComponent implements OnInit {
@@ -22,20 +18,17 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.service.get().subscribe({
       next: (response) => {
-        this.categories = response.payLoad.map((category) => ({
-          ...category,
-          Type: category.isInput ? 'Income' : 'Expense',
-        }));
+        this.categories = response.payLoad;
+        // this.categories = response.payLoad.map((category) => ({
+        //   ...category,
+        //   Type: category.isInput ? 'Income' : 'Expense',
+        // }));
       },
       error: (error) => {
         console.log(error);
       },
     });
   }
-  categoriesTableColumns = [
-    { key: 'title', label: 'Title' },
-    { key: 'Type', label: 'Type' },
-  ];
 
   title = 'Categories';
 

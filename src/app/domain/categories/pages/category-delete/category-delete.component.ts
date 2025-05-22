@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-category-delete',
   imports: [],
   templateUrl: './category-delete.component.html',
-  styleUrl: './category-delete.component.css'
 })
-export class CategoryDeleteComponent {
-
-}
+export class CategoryDeleteComponent {}
