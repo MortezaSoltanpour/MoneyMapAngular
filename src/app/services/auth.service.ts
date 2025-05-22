@@ -2,7 +2,8 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ApiAddresses } from '../shared/apiAddress';
-import { Credentials } from '../domain/users/models/usersDto';
+import { Credentials, TokenDto } from '../domain/users/models/usersDto';
+import { ApiResponse } from '../shared/models/api-response';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +15,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: Credentials): Observable<{ token: string }> {
-    console.table(credentials);
-    return this.http.post<{ token: string }>(this.authUrl, credentials).pipe(
-      tap((response) => {
-        localStorage.setItem(this.tokenKey, response.token);
-        this.isLoggedIn.set(true);
-      })
-    );
+  login(credentials: Credentials): Observable<ApiResponse<TokenDto>> {
+    return this.http
+      .post<ApiResponse<TokenDto>>(this.authUrl, credentials)
+      .pipe(
+        tap((response) => {
+          localStorage.setItem(this.tokenKey, response.payLoad.jwt);
+          this.isLoggedIn.set(true);
+        })
+      );
   }
 
   logout(): void {

@@ -5,6 +5,7 @@ import { categoriesRoutes } from './domain/categories/categories.routes';
 import { transactionRoutes } from './domain/transactions/transactions.routes';
 import { dashboardRoutes } from './domain/dashboard/dashboard.routes';
 import { usersRoutes } from './domain/users/users.routes';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         children: dashboardRoutes,
+        canActivate: [authGuard],
       },
       {
         path: 'categories',
