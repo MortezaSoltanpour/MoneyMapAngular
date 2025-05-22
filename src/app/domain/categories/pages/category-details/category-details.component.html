@@ -1,1 +1,8 @@
-<p>category-details works!</p>
+<app-main-title [showAddBtn]="false" [title]="title"> </app-main-title>
+
+<app-breadcrumb
+  [breadCrumbList]="[
+    { title: 'Categories', link: '/financial/categories' },
+    { title: title, link: '' }
+  ]"
+></app-breadcrumb>

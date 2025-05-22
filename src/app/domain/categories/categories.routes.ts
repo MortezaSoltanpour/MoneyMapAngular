@@ -18,12 +18,12 @@ export const categoriesRoutes: Routes = [
     data: { title: 'Details' },
   },
   {
-    path: 'edit:id',
+    path: 'edit/:id',
     component: CategoryEditComponent,
     data: { title: 'Edit' },
   },
   {
-    path: 'delete:id',
+    path: 'delete/:id',
     component: CategoryDeleteComponent,
     data: { title: 'Delete' },
   },
