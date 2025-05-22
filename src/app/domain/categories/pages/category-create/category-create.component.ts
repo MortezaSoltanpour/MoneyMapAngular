@@ -5,7 +5,6 @@ import { MainTitleComponent } from '../../../../components/common/main-title/mai
 import {
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
