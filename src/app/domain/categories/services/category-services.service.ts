@@ -29,10 +29,11 @@ export class CategoryServicesService {
     );
   }
   add(data: categoryDto) {
-    return this.httpClient.post(
-      `${ApiAddresses.category}${ApiAddresses.add}`,
-      data
-    );
+    console.log(data);
+    return this.httpClient.post(`${ApiAddresses.category}${ApiAddresses.add}`, {
+      title: data.title,
+      isInput: data.isInput,
+    });
   }
 
   update(data: categoryDto) {

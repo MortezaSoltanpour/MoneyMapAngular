@@ -53,8 +53,12 @@ export class CategoryCreateComponent {
     this.loading.show();
     const formData = this.pageForm.value;
 
-    this.catData.isInput = formData.IsInput ? formData.IsInput : false;
-    this.catData.title = formData.Title ? formData.Title : '';
+    this.catData = {
+      idCategory: '',
+      isInput: formData.IsInput ?? false,
+      title: formData.Title ?? '',
+      dateRegistered: new Date(),
+    };
 
     this.service.add(this.catData).subscribe({
       next: (response) => {
@@ -63,6 +67,7 @@ export class CategoryCreateComponent {
       },
       error: (error) => {
         console.log(error);
+        this.loading.hide();
       },
     });
 
