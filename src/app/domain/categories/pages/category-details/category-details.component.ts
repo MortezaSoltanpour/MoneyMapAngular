@@ -21,7 +21,6 @@ export class CategoryDetailsComponent implements OnInit {
     idCategory: '',
     isInput: false,
     title: '',
-    type: '',
     dateRegistered: new Date(),
   };
 

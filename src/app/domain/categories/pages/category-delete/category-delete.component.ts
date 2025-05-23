@@ -34,7 +34,6 @@ export class CategoryDeleteComponent {
     idCategory: '',
     isInput: false,
     title: '',
-    type: '',
     dateRegistered: new Date(),
   };
 

@@ -8,9 +8,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { categoryModel } from '../../models/categoryDtos';
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
 import { CategoryServicesService } from '../../services/category-services.service';
+import { categoryDto } from '../../models/categoryDtos';
 
 @Component({
   selector: 'app-category-create',
@@ -35,9 +35,11 @@ export class CategoryCreateComponent {
     IsInput: new FormControl(false, [Validators.required]),
   });
 
-  catData: categoryModel = {
+  catData: categoryDto = {
     isInput: false,
     title: '',
+    dateRegistered: new Date(),
+    idCategory: '',
   };
 
   handleSubmit() {

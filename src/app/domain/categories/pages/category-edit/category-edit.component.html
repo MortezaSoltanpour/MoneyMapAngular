@@ -6,3 +6,43 @@
     { title: title, link: '' }
   ]"
 ></app-breadcrumb>
+
+<form [formGroup]="pageForm" (ngSubmit)="handleSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="Title" class="form-label">Title</label>
+        <input formControlName="Title" class="form-control" />
+      </div>
+      <app-validation-messages
+        [control]="pageForm.get('Title')"
+        label="Title"
+      ></app-validation-messages>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <div class="mb-3">
+          <label for="IsInput" class="form-label">Type of transaction</label>
+          <select
+            formControlName="IsInput"
+            type="password"
+            class="form-control"
+          >
+            <option [ngValue]="false">Expenses</option>
+            <option [ngValue]="true">Income</option>
+          </select>
+          <app-validation-messages
+            [control]="pageForm.get('IsInput')"
+            label="Type of transaction"
+          ></app-validation-messages>
+          <div class="form-text">
+            Is this type of transaction income or expense?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
