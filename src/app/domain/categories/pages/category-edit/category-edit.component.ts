@@ -11,6 +11,7 @@ import {
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CategoryServicesService } from '../../services/category-services.service';
 import { categoryDto } from '../../models/categoryDtos';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
   selector: 'app-category-edit',
@@ -29,7 +30,8 @@ export class CategoryEditComponent implements OnInit {
   constructor(
     private service: CategoryServicesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loading: LoadingService
   ) {}
 
   category: categoryDto = {
@@ -40,6 +42,7 @@ export class CategoryEditComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.loading.show();
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.service.getOne(id).subscribe({
       next: (response) => {
@@ -54,6 +57,7 @@ export class CategoryEditComponent implements OnInit {
             Validators.required,
           ]),
         });
+        this.loading.hide();
       },
       error: (error) => {
         console.log(error);
@@ -79,10 +83,12 @@ export class CategoryEditComponent implements OnInit {
       console.error('Model is not valid');
       return;
     }
+
+    this.loading.show();
     const formData = this.pageForm.value;
 
     this.catData = {
-      idCategory: this.category.idCategory, // important!
+      idCategory: this.category.idCategory,
       isInput: formData.IsInput ?? false,
       title: formData.Title ?? '',
       dateRegistered: new Date(),
@@ -90,6 +96,7 @@ export class CategoryEditComponent implements OnInit {
 
     this.service.update(this.catData).subscribe({
       next: (response) => {
+        this.loading.hide();
         this.router.navigate(['/financial/categories']);
       },
       error: (error) => {
@@ -100,5 +107,6 @@ export class CategoryEditComponent implements OnInit {
     this.pageForm.reset({
       IsInput: false,
     });
+    this.loading.hide();
   }
 }

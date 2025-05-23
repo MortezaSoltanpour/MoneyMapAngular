@@ -5,6 +5,7 @@ import { CategoryServicesService } from '../../services/category-services.servic
 import { categoryDto } from '../../models/categoryDtos';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
   selector: 'app-category-details',
@@ -14,7 +15,8 @@ import { NgIf } from '@angular/common';
 export class CategoryDetailsComponent implements OnInit {
   constructor(
     private service: CategoryServicesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loading: LoadingService
   ) {}
 
   category: categoryDto = {
@@ -25,10 +27,12 @@ export class CategoryDetailsComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.loading.show();
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.service.getOne(id).subscribe({
       next: (response) => {
         this.category = response.payLoad;
+        this.loading.hide();
       },
       error: (error) => {
         console.log(error);

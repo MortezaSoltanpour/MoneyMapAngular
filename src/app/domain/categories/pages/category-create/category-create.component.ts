@@ -11,6 +11,7 @@ import {
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
 import { CategoryServicesService } from '../../services/category-services.service';
 import { categoryDto } from '../../models/categoryDtos';
+import { LoadingService } from '../../../../services/loading.service';
 
 @Component({
   selector: 'app-category-create',
@@ -26,7 +27,8 @@ import { categoryDto } from '../../models/categoryDtos';
 export class CategoryCreateComponent {
   constructor(
     private service: CategoryServicesService,
-    private router: Router
+    private router: Router,
+    private loading: LoadingService
   ) {}
   title = 'Create';
 
@@ -48,12 +50,16 @@ export class CategoryCreateComponent {
       console.error('Model is not valid');
       return;
     }
+    this.loading.show();
     const formData = this.pageForm.value;
+
     this.catData.isInput = formData.IsInput ? formData.IsInput : false;
     this.catData.title = formData.Title ? formData.Title : '';
+
     this.service.add(this.catData).subscribe({
       next: (response) => {
         this.router.navigate(['/financial/categories']);
+        this.loading.hide();
       },
       error: (error) => {
         console.log(error);
