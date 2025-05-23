@@ -23,6 +23,11 @@ export class CategoryServicesService {
     );
   }
 
+  delete(id: string): Observable<ApiResponse<null>> {
+    return this.httpClient.delete<ApiResponse<null>>(
+      `${ApiAddresses.category}${ApiAddresses.delete}/${id}`
+    );
+  }
   add(data: categoryModel) {
     return this.httpClient.post(
       `${ApiAddresses.category}${ApiAddresses.add}`,

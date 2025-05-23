@@ -6,3 +6,24 @@
     { title: title, link: '' }
   ]"
 ></app-breadcrumb>
+
+<div class="row">
+  <div class="col-12 my-4">
+    <h2>Are you sure about deleting this information?</h2>
+  </div>
+  <div class="col-md-4">
+    Title:
+    {{ category.title }}
+  </div>
+  <div class="col-md-4">
+    Type :
+    <span class="text-success" *ngIf="category.isInput">Income</span>
+    <span class="text-warning" *ngIf="!category.isInput">Expense</span>
+  </div>
+
+  <div class="col-12 mt-5">
+    <form (submit)="deleteData()">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
