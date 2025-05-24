@@ -12,6 +12,7 @@ import { ValidationMessagesComponent } from '../../../../components/shared/valid
 import { CategoryServicesService } from '../../services/category-services.service';
 import { categoryDto } from '../../models/categoryDtos';
 import { LoadingService } from '../../../../services/loading.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-category-create',
@@ -60,19 +61,20 @@ export class CategoryCreateComponent {
       dateRegistered: new Date(),
     };
 
-    this.service.add(this.catData).subscribe({
-      next: (response) => {
-        this.router.navigate(['/financial/categories']);
-        this.loading.hide();
-      },
-      error: (error) => {
-        console.log(error);
-        this.loading.hide();
-      },
-    });
-
-    this.pageForm.reset({
-      IsInput: false,
-    });
+    this.service
+      .add(this.catData)
+      .pipe(
+        finalize(() => {
+          this.loading.hide();
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/financial/categories']);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }

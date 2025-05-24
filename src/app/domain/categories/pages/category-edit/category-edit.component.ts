@@ -13,6 +13,7 @@ import { CategoryServicesService } from '../../services/category-services.servic
 import { categoryDto } from '../../models/categoryDtos';
 import { LoadingService } from '../../../../services/loading.service';
 import { NgIf } from '@angular/common';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-category-edit',
@@ -95,19 +96,20 @@ export class CategoryEditComponent implements OnInit {
       dateRegistered: new Date(),
     };
 
-    this.service.update(this.catData).subscribe({
-      next: (response) => {
-        this.loading.hide();
-        this.router.navigate(['/financial/categories']);
-      },
-      error: (error) => {
-        console.log(error);
-        this.loading.hide();
-      },
-    });
-
-    this.pageForm.reset({
-      IsInput: false,
-    });
+    this.service
+      .update(this.catData)
+      .pipe(
+        finalize(() => {
+          this.loading.hide();
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/financial/categories']);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }

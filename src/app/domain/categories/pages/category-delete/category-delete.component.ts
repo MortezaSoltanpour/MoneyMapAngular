@@ -26,7 +26,7 @@ export class CategoryDeleteComponent {
         })
       )
       .subscribe({
-        next: (response) => {
+        next: () => {
           this.router.navigate(['/financial/categories']);
         },
         error: (error) => {
