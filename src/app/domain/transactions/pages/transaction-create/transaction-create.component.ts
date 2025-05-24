@@ -32,6 +32,7 @@ export class TransactionCreateComponent {
       Validators.min(0.01),
       Validators.pattern(/^\d+(\.\d{1,2})?$/),
     ]),
+    IsInput: new FormControl(true),
     IdCategory: new FormControl('', [Validators.required]),
   });
 

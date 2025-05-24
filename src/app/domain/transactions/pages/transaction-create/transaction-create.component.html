@@ -12,7 +12,30 @@
     <div class="col-md-6">
       <div class="mb-3">
         <div class="mb-3">
-          <label for="IdCategory" class="form-label">Type of transaction</label>
+          <label for="IsInput" class="form-label">Type of transaction</label>
+          <select
+            formControlName="IsInput"
+            type="password"
+            class="form-control"
+          >
+            <option [ngValue]="false">Expenses</option>
+            <option [ngValue]="true">Income</option>
+          </select>
+          <app-validation-messages
+            [control]="pageForm.get('IsInput')"
+            label="Type of transaction"
+          ></app-validation-messages>
+          <div class="form-text">
+            Is this type of transaction income or expense?
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <div class="mb-3">
+          <label for="IdCategory" class="form-label">Category</label>
           <select
             formControlName="IdCategory"
             type="password"
