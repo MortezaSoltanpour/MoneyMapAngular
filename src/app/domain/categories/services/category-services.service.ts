@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiAddresses } from '../../../shared/apiAddress';
 import { ApiResponse } from '../../../shared/models/api-response';
@@ -11,9 +11,15 @@ import { Observable } from 'rxjs';
 export class CategoryServicesService {
   constructor(private httpClient: HttpClient) {}
 
-  get(): Observable<ApiResponse<categoryDto[]>> {
+  get(isInput: boolean | null = null): Observable<ApiResponse<categoryDto[]>> {
+    let params = new HttpParams();
+    if (isInput !== null) {
+      params = params.set('isinput', isInput.toString());
+    }
+
     return this.httpClient.get<ApiResponse<categoryDto[]>>(
-      `${ApiAddresses.category}${ApiAddresses.all}`
+      `${ApiAddresses.category}${ApiAddresses.all}`,
+      { params }
     );
   }
 

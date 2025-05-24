@@ -14,6 +14,7 @@
         <div class="mb-3">
           <label for="IsInput" class="form-label">Type of transaction</label>
           <select
+            (change)="loadCategories()"
             formControlName="IsInput"
             type="password"
             class="form-control"
@@ -36,13 +37,10 @@
       <div class="mb-3">
         <div class="mb-3">
           <label for="IdCategory" class="form-label">Category</label>
-          <select
-            formControlName="IdCategory"
-            type="password"
-            class="form-control"
-          >
-            <option [ngValue]="false">Expenses</option>
-            <option [ngValue]="true">Income</option>
+          <select formControlName="IdCategory" class="form-control">
+            <option *ngFor="let cat of categories" [value]="cat.idCategory">
+              {{ cat.title }}
+            </option>
           </select>
           <app-validation-messages
             [control]="pageForm.get('IdCategory')"
@@ -71,7 +69,12 @@
     <div class="col-md-6">
       <div class="mb-3">
         <label for="Amount" class="form-label">Amount</label>
-        <input formControlName="Amount" class="form-control" />
+        <input
+          formControlName="Amount"
+          type="number"
+          step="0.01"
+          class="form-control"
+        />
       </div>
       <app-validation-messages
         [control]="pageForm.get('Amount')"

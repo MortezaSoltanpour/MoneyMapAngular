@@ -23,3 +23,9 @@ a.nav-link.active {
 a.nav-link.active::after {
   width: 100%;
 }
+
+select {
+  -webkit-appearance: auto !important; /* Safari, Chrome */
+  -moz-appearance: auto !important; /* Firefox */
+  appearance: auto !important;
+}

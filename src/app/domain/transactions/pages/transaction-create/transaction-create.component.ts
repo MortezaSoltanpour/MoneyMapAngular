@@ -8,6 +8,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LoadingService } from '../../../../services/loading.service';
+import { CategoryServicesService } from '../../../categories/services/category-services.service';
+import { categoryDto } from '../../../categories/models/categoryDtos';
+import { finalize } from 'rxjs';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-create',
@@ -15,12 +20,47 @@ import {
     MainTitleComponent,
     BreadcrumbComponent,
     ReactiveFormsModule,
+    NgFor,
     ValidationMessagesComponent,
   ],
   templateUrl: './transaction-create.component.html',
 })
 export class TransactionCreateComponent {
   title = 'Create';
+  categories: categoryDto[] = [];
+
+  constructor(
+    private catService: CategoryServicesService,
+    private loading: LoadingService
+  ) {}
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    const inputType = this.pageForm.get('IsInput')?.value;
+    this.loading.show();
+    this.catService
+      .get(inputType)
+      .pipe(
+        finalize(() => {
+          this.loading.hide();
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.categories = response.payLoad;
+          if (this.categories.length) {
+            this.pageForm
+              .get('IdCategory')
+              ?.setValue(this.categories[0].idCategory);
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
 
   pageForm = new FormGroup({
     Description: new FormControl('', [
@@ -36,5 +76,13 @@ export class TransactionCreateComponent {
     IdCategory: new FormControl('', [Validators.required]),
   });
 
-  handleSubmit() {}
+  handleSubmit() {
+    if (this.pageForm.invalid) {
+      this.pageForm.markAllAsTouched();
+      return;
+    }
+
+    const formData = this.pageForm.value;
+    console.log(formData);
+  }
 }
