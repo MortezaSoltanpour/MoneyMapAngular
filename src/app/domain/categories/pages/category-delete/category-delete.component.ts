@@ -7,6 +7,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { categoryDto } from '../../models/categoryDtos';
 import { FormsModule } from '@angular/forms';
 import { LoadingService } from '../../../../services/loading.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-category-delete',
@@ -15,15 +16,23 @@ import { LoadingService } from '../../../../services/loading.service';
 })
 export class CategoryDeleteComponent {
   deleteData() {
+    this.loading.show();
     const id = this.route.snapshot.paramMap.get('id') ?? '';
-    this.service.delete(id).subscribe({
-      next: (response) => {
-        this.router.navigate(['/financial/categories']);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    this.service
+      .delete(id)
+      .pipe(
+        finalize(() => {
+          this.loading.hide();
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.router.navigate(['/financial/categories']);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
   constructor(
     private service: CategoryServicesService,

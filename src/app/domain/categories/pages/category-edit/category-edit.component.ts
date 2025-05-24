@@ -12,6 +12,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CategoryServicesService } from '../../services/category-services.service';
 import { categoryDto } from '../../models/categoryDtos';
 import { LoadingService } from '../../../../services/loading.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-category-edit',
@@ -33,7 +34,6 @@ export class CategoryEditComponent implements OnInit {
     private route: ActivatedRoute,
     private loading: LoadingService
   ) {}
-
   category: categoryDto = {
     idCategory: '',
     isInput: false,
@@ -43,6 +43,7 @@ export class CategoryEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading.show();
+
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.service.getOne(id).subscribe({
       next: (response) => {
@@ -101,12 +102,12 @@ export class CategoryEditComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+        this.loading.hide();
       },
     });
 
     this.pageForm.reset({
       IsInput: false,
     });
-    this.loading.hide();
   }
 }
