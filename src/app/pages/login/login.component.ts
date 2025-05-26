@@ -54,7 +54,10 @@ export class LoginComponent {
       )
       .subscribe({
         next: () => this.router.navigate(['/financial/dashboard']),
-        error: (err) => alert('Login failed'),
+        error: (err) => {
+          console.log(err);
+          alert('Login failed');
+        },
       });
   }
 }

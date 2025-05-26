@@ -2,3 +2,7 @@
 @import url("https://colorlib.com/etc/lf/Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css");
 @import url("https://colorlib.com/etc/lf/Login_v1/css/util.css");
 @import url("https://colorlib.com/etc/lf/Login_v1/css/main.css");
+
+.login100-form-btn :disabled {
+  background-color: #b1d1ab !important;
+}
