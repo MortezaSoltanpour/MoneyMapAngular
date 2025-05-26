@@ -13,6 +13,9 @@ import { CategoryServicesService } from '../../../categories/services/category-s
 import { categoryDto } from '../../../categories/models/categoryDtos';
 import { finalize } from 'rxjs';
 import { NgFor } from '@angular/common';
+import { TransactionServicesService } from '../../services/transaction-services.service';
+import { transactionDto } from '../../models/transactionDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-create',
@@ -31,7 +34,9 @@ export class TransactionCreateComponent {
 
   constructor(
     private catService: CategoryServicesService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private services: TransactionServicesService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.loadCategories();
@@ -76,13 +81,38 @@ export class TransactionCreateComponent {
     IdCategory: new FormControl('', [Validators.required]),
   });
 
+  transactionData: transactionDto = {
+    amount: 0,
+    Idcategory: '',
+    description: '',
+  };
+
   handleSubmit() {
     if (this.pageForm.invalid) {
       this.pageForm.markAllAsTouched();
       return;
     }
+    this.loading.show();
 
     const formData = this.pageForm.value;
-    console.log(formData);
+
+    this.transactionData.amount = formData.Amount ?? 0;
+    this.transactionData.description = formData.Description ?? '0';
+    this.transactionData.Idcategory = formData.IdCategory ?? '0';
+    this.services
+      .add(this.transactionData)
+      .pipe(
+        finalize(() => {
+          this.loading.hide();
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/financial/transactions']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 }

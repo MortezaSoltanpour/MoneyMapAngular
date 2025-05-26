@@ -1,6 +1,7 @@
 export class ApiAddresses {
   static baseAddress: string = 'https://moneymapapi.msoltanpour.ca/api/v1';
   static category: string = '/categories';
+  static transaction: string = '/transactions';
   static user: string = '/users';
   static add: string = '/add';
   static edit: string = '/edit';

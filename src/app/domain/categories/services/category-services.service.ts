@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiAddresses } from '../../../shared/apiAddress';
 import { ApiResponse } from '../../../shared/models/api-response';
