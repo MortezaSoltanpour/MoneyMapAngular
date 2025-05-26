@@ -2,4 +2,41 @@
 
 <app-breadcrumb [breadCrumbList]="[{ title: title, link: '' }]">
 </app-breadcrumb>
-<app-table [columns]="userTableColumns" [data]="userTableData"> </app-table>
+
+<table class="table table-hover table-striped table-bordered">
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Description</td>
+      <td>Amount</td>
+      <td>Category</td>
+      <td>Date</td>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of transactions; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.description }}</td>
+      <td>{{ item.amount | number : "1.0-2" }}</td>
+      <td>{{ item.category }}</td>
+      <td>{{ item.dateRegistered | date : "yyyy/mm/dd" }}</td>
+
+      <th>
+        <a
+          routerLink="/financial/transactions/details/{{ item.idTransaction }}"
+        >
+          <i class="text-primary bi bi-info-circle"></i>
+        </a>
+        |
+        <a routerLink="/financial/transactions/edit/{{ item.idTransaction }}">
+          <i class="text-warning bi bi-pencil"></i>
+        </a>
+        |
+        <a routerLink="/financial/transactions/delete/{{ item.idTransaction }}">
+          <i class="text-danger bi bi-trash"></i>
+        </a>
+      </th>
+    </tr>
+  </tbody>
+</table>
