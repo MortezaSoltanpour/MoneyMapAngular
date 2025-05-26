@@ -52,7 +52,14 @@
         </div>
 
         <div class="container-login100-form-btn">
-          <button type="submit" class="login100-form-btn">Login</button>
+          <button
+            [disabled]="isLoading"
+            type="submit"
+            class="login100-form-btn"
+          >
+            <i *ngIf="isLoading" class="fa fa-spin fa-spinner mr-2"></i>
+            Login
+          </button>
         </div>
 
         <div class="text-center p-t-12 p-b-136">

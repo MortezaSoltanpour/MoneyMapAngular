@@ -9,10 +9,17 @@ import {
 } from '@angular/forms';
 import { ValidationMessagesComponent } from '../../components/shared/validation-messages/validation-messages.component';
 import { Credentials } from '../../domain/users/models/usersDto';
+import { finalize } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterModule, ReactiveFormsModule, ValidationMessagesComponent],
+  imports: [
+    NgIf,
+    RouterModule,
+    ReactiveFormsModule,
+    ValidationMessagesComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -23,13 +30,14 @@ export class LoginComponent {
   });
 
   constructor(private auth: AuthService, private router: Router) {}
-
+  isLoading = false;
   onSubmit() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       console.error('Model is not valid');
       return;
     }
+    this.isLoading = true;
     const formData = this.loginForm.value;
 
     let credential: Credentials = {
@@ -37,9 +45,16 @@ export class LoginComponent {
       password: formData.password ?? '',
     };
 
-    this.auth.login(credential).subscribe({
-      next: () => this.router.navigate(['/financial/dashboard']),
-      error: (err) => alert('Login failed'),
-    });
+    this.auth
+      .login(credential)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe({
+        next: () => this.router.navigate(['/financial/dashboard']),
+        error: (err) => alert('Login failed'),
+      });
   }
 }
