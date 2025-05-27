@@ -6,4 +6,5 @@ export interface transactionDto {
   category?: string | null;
   fileAttached?: string | null;
   idTransaction?: string | null;
+  isInput?: boolean | null;
 }

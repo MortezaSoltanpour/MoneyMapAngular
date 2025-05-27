@@ -49,7 +49,7 @@ export class TransactionEditComponent implements OnInit {
     Amount: FormControl<number | null>;
     IsInput: FormControl<boolean | null>;
     IdCategory: FormControl<string | null>;
-    dateRegistered: FormControl<string | null>;
+    dateRegistered: FormControl<Date | null>;
   }>({
     Description: new FormControl(null, [
       Validators.required,
@@ -80,9 +80,7 @@ export class TransactionEditComponent implements OnInit {
           IsInput: true,
           IdCategory: this.transactionData.idCategory ?? null,
           dateRegistered: this.transactionData.dateRegistered
-            ? new Date(this.transactionData.dateRegistered)
-                .toISOString()
-                .substring(0, 10)
+            ? this.transactionData.dateRegistered
             : null,
         });
         this.loading.hide();
@@ -106,6 +104,16 @@ export class TransactionEditComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.categories = response.payLoad;
+
+          const currentValue = this.pageForm.get('idCategory')?.value;
+          const existsInList = this.categories.some(
+            (cat) => cat.idCategory === currentValue
+          );
+          if (!currentValue || !existsInList) {
+            this.pageForm
+              .get('IdCategory')
+              ?.setValue(this.categories[0].idCategory);
+          }
         },
         error: (error) => {
           console.log(error);
@@ -125,6 +133,7 @@ export class TransactionEditComponent implements OnInit {
     this.transactionData.amount = formData.Amount ?? 0;
     this.transactionData.description = formData.Description ?? '0';
     this.transactionData.idCategory = formData.IdCategory ?? '0';
+    this.transactionData.dateRegistered = formData.dateRegistered ?? null;
     this.service
       .update(this.transactionData)
       .pipe(

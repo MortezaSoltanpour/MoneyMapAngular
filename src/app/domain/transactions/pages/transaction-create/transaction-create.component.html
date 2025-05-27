@@ -82,6 +82,23 @@
       ></app-validation-messages>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="dateRegistered" class="form-label">Date</label>
+        <input
+          type="date"
+          formControlName="dateRegistered"
+          class="form-control"
+        />
+        <app-validation-messages
+          [control]="pageForm.get('dateRegistered')"
+          label="Date"
+        ></app-validation-messages>
+      </div>
+    </div>
+  </div>
   <div></div>
   <button type="submit" class="btn btn-success">Submit</button>
 </form>

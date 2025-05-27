@@ -79,6 +79,7 @@ export class TransactionCreateComponent {
     ]),
     IsInput: new FormControl(true),
     IdCategory: new FormControl('', [Validators.required]),
+    dateRegistered: new FormControl(null, [Validators.required]),
   });
 
   transactionData: transactionDto = {
@@ -99,6 +100,7 @@ export class TransactionCreateComponent {
     this.transactionData.amount = formData.Amount ?? 0;
     this.transactionData.description = formData.Description ?? '0';
     this.transactionData.idCategory = formData.IdCategory ?? '0';
+    this.transactionData.dateRegistered = formData.dateRegistered ?? null;
     this.services
       .add(this.transactionData)
       .pipe(

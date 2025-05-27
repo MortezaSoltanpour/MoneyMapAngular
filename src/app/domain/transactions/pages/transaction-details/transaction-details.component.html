@@ -24,7 +24,11 @@
     <span class="fw-bold"> Category: </span>
     {{ transactionData.category }}
   </div>
-
+  <div class="col-md-4">
+    Type :
+    <span class="text-success" *ngIf="transactionData.isInput">Income</span>
+    <span class="text-warning" *ngIf="!transactionData.isInput">Expense</span>
+  </div>
   <div class="col-md-4 mb-4" *ngIf="transactionData.fileAttached">
     <span class="fw-bold">File:</span>
     <a [href]="transactionData.fileAttached" target="_blank">View File</a>

@@ -37,6 +37,8 @@ export class TransactionServicesService {
     );
   }
   add(data: transactionDto) {
+    console.log(JSON.stringify(data));
+
     return this.httpClient.post(
       `${ApiAddresses.transaction}${ApiAddresses.add}`,
       data
