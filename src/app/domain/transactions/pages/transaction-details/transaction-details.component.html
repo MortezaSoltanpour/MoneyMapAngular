@@ -18,11 +18,16 @@
   </div>
   <div class="col-md-4 mb-4">
     <span class="fw-bold"> Date: </span>
-    {{ transactionData.dateRegistered | date : "yyyy/mm/dd" }}
+    {{ transactionData.dateRegistered | date : "yyyy/MM/dd" }}
   </div>
   <div class="col-md-4 mb-4">
     <span class="fw-bold"> Category: </span>
     {{ transactionData.category }}
+  </div>
+
+  <div class="col-md-4 mb-4" *ngIf="transactionData.fileAttached">
+    <span class="fw-bold">File:</span>
+    <a [href]="transactionData.fileAttached" target="_blank">View File</a>
   </div>
 </div>
 
