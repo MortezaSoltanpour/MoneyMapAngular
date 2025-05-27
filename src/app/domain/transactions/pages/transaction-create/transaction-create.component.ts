@@ -83,7 +83,7 @@ export class TransactionCreateComponent {
 
   transactionData: transactionDto = {
     amount: 0,
-    Idcategory: '',
+    idCategory: '',
     description: '',
   };
 
@@ -98,7 +98,7 @@ export class TransactionCreateComponent {
 
     this.transactionData.amount = formData.Amount ?? 0;
     this.transactionData.description = formData.Description ?? '0';
-    this.transactionData.Idcategory = formData.IdCategory ?? '0';
+    this.transactionData.idCategory = formData.IdCategory ?? '0';
     this.services
       .add(this.transactionData)
       .pipe(

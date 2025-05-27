@@ -27,7 +27,7 @@ export class TransactionDetailsComponent implements OnInit {
 
   transactionData: transactionDto = {
     amount: 0,
-    Idcategory: '',
+    idCategory: '',
     description: '',
   };
 

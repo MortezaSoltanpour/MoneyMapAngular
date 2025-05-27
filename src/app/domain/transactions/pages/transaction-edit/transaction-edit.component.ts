@@ -41,7 +41,7 @@ export class TransactionEditComponent implements OnInit {
 
   transactionData: transactionDto = {
     amount: 0,
-    Idcategory: '',
+    idCategory: '',
     description: '',
   };
   pageForm = new FormGroup<{
@@ -78,7 +78,7 @@ export class TransactionEditComponent implements OnInit {
           Description: this.transactionData.description ?? null,
           Amount: this.transactionData.amount ?? null,
           IsInput: true,
-          IdCategory: this.transactionData.Idcategory ?? null,
+          IdCategory: this.transactionData.idCategory ?? null,
           dateRegistered: this.transactionData.dateRegistered
             ? new Date(this.transactionData.dateRegistered)
                 .toISOString()
@@ -106,11 +106,6 @@ export class TransactionEditComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.categories = response.payLoad;
-          if (this.categories.length) {
-            this.pageForm
-              .get('IdCategory')
-              ?.setValue(this.categories[0].idCategory);
-          }
         },
         error: (error) => {
           console.log(error);
@@ -129,7 +124,7 @@ export class TransactionEditComponent implements OnInit {
 
     this.transactionData.amount = formData.Amount ?? 0;
     this.transactionData.description = formData.Description ?? '0';
-    this.transactionData.Idcategory = formData.IdCategory ?? '0';
+    this.transactionData.idCategory = formData.IdCategory ?? '0';
     this.service
       .update(this.transactionData)
       .pipe(
