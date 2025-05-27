@@ -17,17 +17,17 @@ export const transactionRoutes: Routes = [
     data: { title: 'Create' },
   },
   {
-    path: 'edit',
+    path: 'edit/:id',
     component: TransactionEditComponent,
     data: { title: 'Edit' },
   },
   {
-    path: 'details',
+    path: 'details/:id',
     component: TransactionDetailsComponent,
     data: { title: 'Details' },
   },
   {
-    path: 'delete',
+    path: 'delete/:id',
     component: TransactionDeleteComponent,
     data: { title: 'Delete' },
   },

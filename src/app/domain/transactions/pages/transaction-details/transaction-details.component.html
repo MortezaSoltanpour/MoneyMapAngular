@@ -1,1 +1,31 @@
-<p>transaction-details works!</p>
+<app-main-title [showAddBtn]="false" [title]="title"> </app-main-title>
+
+<app-breadcrumb
+  [breadCrumbList]="[
+    { title: 'Transactions', link: '/financial/transactions' },
+    { title: title, link: '' }
+  ]"
+></app-breadcrumb>
+
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Title: </span>
+    {{ transactionData.description }}
+  </div>
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Amount: </span>
+    {{ transactionData.amount | number : "1.0-2" }}
+  </div>
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Date: </span>
+    {{ transactionData.dateRegistered | date : "yyyy/mm/dd" }}
+  </div>
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Category: </span>
+    {{ transactionData.category }}
+  </div>
+</div>
+
+<a routerLink="/financial/transactions/edit/{{ transactionData.idTransaction }}"
+  >Edit</a
+>
