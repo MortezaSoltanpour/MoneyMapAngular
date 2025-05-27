@@ -22,8 +22,17 @@
       <td>{{ item.amount | number : "1.0-2" }}</td>
       <td>{{ item.category }}</td>
       <td>
-        <span class="text-success" *ngIf="item.isInput">Income</span>
-        <span class="text-warning" *ngIf="!item.isInput">Expense</span>
+        <span class="text-success" *ngIf="item.isInput">
+          <i
+            class="fa fa-arrow-up-right-from-square"
+            style="transform: rotate(180deg)"
+          ></i>
+          Income</span
+        >
+        <span class="text-warning" *ngIf="!item.isInput">
+          <i class="fa fa-arrow-up-right-from-square"></i>
+          Expense</span
+        >
       </td>
       <td>{{ item.dateRegistered | date : "yyyy/MM/dd" }}</td>
 

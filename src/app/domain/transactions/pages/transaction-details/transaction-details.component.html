@@ -26,8 +26,17 @@
   </div>
   <div class="col-md-4">
     Type :
-    <span class="text-success" *ngIf="transactionData.isInput">Income</span>
-    <span class="text-warning" *ngIf="!transactionData.isInput">Expense</span>
+    <span class="text-success" *ngIf="transactionData.isInput">
+      <i
+        class="fa fa-arrow-up-right-from-square"
+        style="transform: rotate(180deg); margin-right: 5px"
+      ></i>
+      Income</span
+    >
+    <span class="text-warning" *ngIf="!transactionData.isInput">
+      <i class="fa fa-arrow-up-right-from-square" style="margin-right: 5px"></i
+      >Expense</span
+    >
   </div>
   <div class="col-md-4 mb-4" *ngIf="transactionData.fileAttached">
     <span class="fw-bold">File:</span>
