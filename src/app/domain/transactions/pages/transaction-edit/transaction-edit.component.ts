@@ -49,7 +49,7 @@ export class TransactionEditComponent implements OnInit {
     Amount: FormControl<number | null>;
     IsInput: FormControl<boolean | null>;
     IdCategory: FormControl<string | null>;
-    dateRegistered: FormControl<Date | null>;
+    dateRegistered: FormControl<string | null>;
   }>({
     Description: new FormControl(null, [
       Validators.required,
@@ -74,14 +74,17 @@ export class TransactionEditComponent implements OnInit {
     this.service.getOne(id).subscribe({
       next: (response) => {
         this.transactionData = response.payLoad;
+
         this.pageForm.setValue({
           Description: this.transactionData.description ?? null,
           Amount: this.transactionData.amount ?? null,
           IsInput: true,
           IdCategory: this.transactionData.idCategory ?? null,
           dateRegistered: this.transactionData.dateRegistered
-            ? this.transactionData.dateRegistered
-            : null,
+            ? new Date(this.transactionData.dateRegistered)
+                .toISOString()
+                .split('T')[0]
+            : '',
         });
         this.loading.hide();
       },
@@ -133,7 +136,9 @@ export class TransactionEditComponent implements OnInit {
     this.transactionData.amount = formData.Amount ?? 0;
     this.transactionData.description = formData.Description ?? '0';
     this.transactionData.idCategory = formData.IdCategory ?? '0';
-    this.transactionData.dateRegistered = formData.dateRegistered ?? null;
+    this.transactionData.dateRegistered = formData.dateRegistered
+      ? new Date(formData.dateRegistered)
+      : null;
     this.service
       .update(this.transactionData)
       .pipe(
