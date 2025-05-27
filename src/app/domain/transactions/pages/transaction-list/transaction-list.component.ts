@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TableComponent } from '../../../../components/shared/table/table.component';
 import {
   userSampleTableColumns,
   userSampleTableData,
@@ -10,7 +9,6 @@ import { TransactionServicesService } from '../../services/transaction-services.
 import { LoadingService } from '../../../../services/loading.service';
 import { finalize } from 'rxjs';
 import { transactionDto } from '../../models/transactionDto';
-import { resetFakeAsyncZone } from '@angular/core/testing';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -20,7 +18,6 @@ import { RouterModule } from '@angular/router';
     NgFor,
     RouterModule,
     CommonModule,
-    TableComponent,
     BreadcrumbComponent,
     MainTitleComponent,
   ],
