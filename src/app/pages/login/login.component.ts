@@ -25,8 +25,8 @@ import { NgIf } from '@angular/common';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('1@1.com', [Validators.required, Validators.email]),
+    password: new FormControl('this is morteza', [Validators.required]),
   });
 
   constructor(private auth: AuthService, private router: Router) {}
