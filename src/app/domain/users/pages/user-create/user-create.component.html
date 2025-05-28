@@ -1,1 +1,48 @@
-<p>user-create works!</p>
+<app-main-title [showAddBtn]="false" [title]="title"> </app-main-title>
+
+<app-breadcrumb
+  [breadCrumbList]="[
+    { title: 'Users', link: '/financial/users' },
+    { title: title, link: '' }
+  ]"
+></app-breadcrumb>
+
+<form [formGroup]="pageForm" (ngSubmit)="handleSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input formControlName="email" class="form-control" />
+      </div>
+      <app-validation-messages
+        [control]="pageForm.get('email')"
+        label="email"
+      ></app-validation-messages>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input formControlName="password" class="form-control" />
+      </div>
+      <app-validation-messages
+        [control]="pageForm.get('password')"
+        label="password"
+      ></app-validation-messages>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="fullname" class="form-label">Full name</label>
+        <input formControlName="fullname" class="form-control" />
+      </div>
+      <app-validation-messages
+        [control]="pageForm.get('fullname')"
+        label="fullname"
+      ></app-validation-messages>
+    </div>
+  </div>
+  <div></div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
