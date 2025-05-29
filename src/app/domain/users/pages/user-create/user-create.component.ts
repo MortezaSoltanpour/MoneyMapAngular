@@ -34,7 +34,7 @@ export class UserCreateComponent {
 
   userData: userDto = {
     email: '',
-    fullName: '',
+    fullname: '',
     password: '',
   };
   pageForm = new FormGroup({
@@ -67,7 +67,7 @@ export class UserCreateComponent {
 
     this.userData = {
       email: formData.email ?? '',
-      fullName: formData.fullname ?? '',
+      fullname: formData.fullname ?? '',
       password: formData.password ?? '',
     };
 

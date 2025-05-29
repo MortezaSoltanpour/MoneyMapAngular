@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TableComponent } from '../../../../components/shared/table/table.component';
 
 import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';

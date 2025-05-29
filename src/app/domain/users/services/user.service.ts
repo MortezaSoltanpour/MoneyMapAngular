@@ -19,7 +19,7 @@ export class UserService {
 
   get(): Observable<ApiResponse<userDto[]>> {
     return this.httpClient.get<ApiResponse<userDto[]>>(
-      `${ApiAddresses.user}${ApiAddresses.all}`
+      `${ApiAddresses.user}/allusers`
     );
   }
 
