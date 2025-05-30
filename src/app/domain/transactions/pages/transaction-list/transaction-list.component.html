@@ -31,7 +31,7 @@
     <label for="dateTo">To:</label>
     <input [(ngModel)]="dateTo" id="dateTo" type="date" class="form-control" />
   </div>
-  <div class="col-md-3">
+  <div class="col-md-5">
     <label for="catId">Type:</label>
     <select [(ngModel)]="idCategory" id="catId" class="form-control">
       <option selected value="">-- Select type of transaction --</option>
@@ -40,7 +40,7 @@
       </option>
     </select>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-1">
     <button (click)="handleFilter()" class="btn btn-primary mt-4">
       Filter
     </button>
