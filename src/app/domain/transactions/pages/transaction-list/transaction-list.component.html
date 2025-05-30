@@ -37,6 +37,7 @@
       <option selected value="">-- Select type of transaction --</option>
       <option *ngFor="let cat of categories" [value]="cat.idCategory">
         {{ cat.title }}
+        {{ cat.isInput ? "+(Income)" : "-(Expense)" }}
       </option>
     </select>
   </div>
