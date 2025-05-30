@@ -62,4 +62,11 @@ export class CategoryDeleteComponent {
     });
   }
   title = 'Delete';
+
+  confirmDelete(event: Event) {
+    event.preventDefault();
+    if (confirm('Are you sure you want to delete this category?')) {
+      this.deleteData();
+    }
+  }
 }
