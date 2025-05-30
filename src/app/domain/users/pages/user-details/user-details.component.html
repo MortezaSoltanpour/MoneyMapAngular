@@ -1,1 +1,25 @@
-<p>user-details works!</p>
+<app-main-title [showAddBtn]="false" [title]="title"> </app-main-title>
+
+<app-breadcrumb
+  [breadCrumbList]="[
+    { title: 'Users', link: '/financial/users' },
+    { title: title, link: '' }
+  ]"
+></app-breadcrumb>
+
+<div class="row">
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Name: </span>
+    {{ user.fullname }}
+  </div>
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Email: </span>
+    {{ user.email }}
+  </div>
+  <div class="col-md-4 mb-4">
+    <span class="fw-bold"> Date: </span>
+    {{ user.dateRegistered | date : "yyyy/MM/dd" }}
+  </div>
+</div>
+
+<a routerLink="/financial/users/edit/{{ user.idUser }}">Edit</a>

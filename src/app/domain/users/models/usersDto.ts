@@ -3,6 +3,7 @@ export interface userDto {
   email: string;
   password?: string;
   fullname: string;
+  dateRegistered?: Date;
 }
 
 export interface Credentials {
