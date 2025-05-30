@@ -12,12 +12,14 @@ export class TransactionServicesService {
   constructor(private httpClient: HttpClient) {}
 
   get(
-    isInput: boolean | null = null
+    dateFrom: Date | null = null,
+    dateTo: Date | null = null,
+    idCategory: string | null = null
   ): Observable<ApiResponse<transactionDto[]>> {
     let params = new HttpParams();
-    if (isInput !== null) {
-      params = params.set('isinput', isInput.toString());
-    }
+    if (dateFrom !== null) params = params.set('dtStart', dateFrom.toString());
+    if (dateTo !== null) params = params.set('dtEnd', dateTo.toString());
+    if (idCategory !== null) params = params.set('idCategory', idCategory);
 
     return this.httpClient.get<ApiResponse<transactionDto[]>>(
       `${ApiAddresses.transaction}${ApiAddresses.all}`,

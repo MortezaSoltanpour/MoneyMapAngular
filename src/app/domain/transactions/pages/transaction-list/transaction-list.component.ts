@@ -12,6 +12,8 @@ import { transactionDto } from '../../models/transactionDto';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CategoryServicesService } from '../../../categories/services/category-services.service';
+import { categoryDto } from '../../../categories/models/categoryDtos';
 
 @Component({
   selector: 'app-transaction-list',
@@ -33,12 +35,14 @@ export class TransactionListComponent implements OnInit {
   outputSum: number = 0;
   constructor(
     private services: TransactionServicesService,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private catService: CategoryServicesService
   ) {}
 
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
-  catId: string | null = null;
+  categories: categoryDto[] = [];
+  idCategory: string | null = '';
   transactions: transactionDto[] = [];
 
   calculateSums(): void {
@@ -52,10 +56,13 @@ export class TransactionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadTransaction();
+  }
+  loadTransaction() {
     this.loading.show();
 
     this.services
-      .get()
+      .get(this.dateFrom, this.dateTo, this.idCategory)
       .pipe(
         finalize(() => {
           this.loading.hide();
@@ -70,5 +77,29 @@ export class TransactionListComponent implements OnInit {
           console.log(error);
         },
       });
+    this.loadCategories();
+  }
+
+  loadCategories() {
+    this.loading.show();
+    this.catService
+      .get()
+      .pipe(
+        finalize(() => {
+          this.loading.hide();
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.categories = response.payLoad;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
+
+  handleFilter() {
+    this.loadTransaction();
   }
 }

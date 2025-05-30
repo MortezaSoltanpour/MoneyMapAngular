@@ -33,10 +33,17 @@
   </div>
   <div class="col-md-3">
     <label for="catId">Type:</label>
-    <select [(ngModel)]="catId" id="catId" class="form-control"></select>
+    <select [(ngModel)]="idCategory" id="catId" class="form-control">
+      <option selected value="">-- Select type of transaction --</option>
+      <option *ngFor="let cat of categories" [value]="cat.idCategory">
+        {{ cat.title }}
+      </option>
+    </select>
   </div>
   <div class="col-md-3">
-    <button class="btn btn-primary mt-4">Filter</button>
+    <button (click)="handleFilter()" class="btn btn-primary mt-4">
+      Filter
+    </button>
   </div>
 </div>
 

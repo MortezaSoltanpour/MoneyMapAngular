@@ -7,6 +7,8 @@ export const baseurlInterceptor: HttpInterceptorFn = (req, next) => {
       url: `${ApiAddresses.baseAddress}${req.url}`,
     });
 
+    console.log(modifiedUrl);
+
     return next(modifiedUrl);
   } else {
     return next(req);
