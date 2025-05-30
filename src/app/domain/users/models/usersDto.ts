@@ -1,7 +1,7 @@
 export interface userDto {
   idUser?: string;
   email: string;
-  password: string;
+  password?: string;
   fullname: string;
 }
 

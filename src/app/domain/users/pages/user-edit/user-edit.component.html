@@ -22,18 +22,6 @@
 
     <div class="col-md-6">
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input formControlName="password" class="form-control" />
-      </div>
-      <app-validation-messages
-        [control]="pageForm.get('password')"
-        label="password"
-      ></app-validation-messages>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="mb-3">
         <label for="fullname" class="form-label">Full name</label>
         <input formControlName="fullname" class="form-control" />
       </div>
@@ -43,6 +31,7 @@
       ></app-validation-messages>
     </div>
   </div>
+
   <div></div>
   <button type="submit" class="btn btn-success">Submit</button>
 </form>

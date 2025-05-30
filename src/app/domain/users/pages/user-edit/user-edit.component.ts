@@ -42,7 +42,6 @@ export class UserEditComponent implements OnInit {
         this.pageForm.setValue({
           email: this.userData.email ?? null,
           fullname: this.userData.fullname ?? null,
-          password: '',
         });
 
         this.loading.hide();
@@ -57,7 +56,6 @@ export class UserEditComponent implements OnInit {
   userData: userDto = {
     email: '',
     fullname: '',
-    password: '',
   };
   pageForm = new FormGroup({
     email: new FormControl('', [
@@ -66,14 +64,10 @@ export class UserEditComponent implements OnInit {
       Validators.email,
       Validators.maxLength(100),
     ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(50),
-    ]),
+
     fullname: new FormControl('', [
       Validators.required,
-      Validators.minLength(6),
+      Validators.minLength(2),
       Validators.maxLength(50),
     ]),
   });
@@ -88,13 +82,13 @@ export class UserEditComponent implements OnInit {
     const formData = this.pageForm.value;
 
     this.userData = {
+      idUser: this.route.snapshot.paramMap.get('id') ?? '',
       email: formData.email ?? '',
       fullname: formData.fullname ?? '',
-      password: formData.password ?? '',
     };
 
     this.service
-      .add(this.userData)
+      .update(this.userData)
       .pipe(
         finalize(() => {
           this.loading.hide();
