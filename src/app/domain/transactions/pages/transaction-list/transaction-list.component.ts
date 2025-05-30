@@ -11,6 +11,7 @@ import { finalize } from 'rxjs';
 import { transactionDto } from '../../models/transactionDto';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-transaction-list',
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     NgFor,
     RouterModule,
     CommonModule,
+    FormsModule,
     BreadcrumbComponent,
     MainTitleComponent,
   ],
@@ -27,13 +29,27 @@ export class TransactionListComponent implements OnInit {
   userTableColumns = userSampleTableColumns;
   userTableData = userSampleTableData;
   title = 'Transactions';
-
+  inputSum: number = 0;
+  outputSum: number = 0;
   constructor(
     private services: TransactionServicesService,
     private loading: LoadingService
   ) {}
 
+  dateFrom: Date | null = null;
+  dateTo: Date | null = null;
+  catId: string | null = null;
   transactions: transactionDto[] = [];
+
+  calculateSums(): void {
+    this.inputSum = this.transactions
+      .filter((t) => t.isInput === true)
+      .reduce((sum, t) => sum + t.amount, 0);
+
+    this.outputSum = this.transactions
+      .filter((t) => t.isInput === false)
+      .reduce((sum, t) => sum + t.amount, 0);
+  }
 
   ngOnInit(): void {
     this.loading.show();
@@ -48,6 +64,7 @@ export class TransactionListComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.transactions = response.payLoad;
+          this.calculateSums();
         },
         error: (error) => {
           console.log(error);
