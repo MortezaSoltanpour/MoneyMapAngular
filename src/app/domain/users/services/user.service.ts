@@ -43,4 +43,10 @@ export class UserService {
       data
     );
   }
+
+  delete(id: string): Observable<ApiResponse<null>> {
+    return this.httpClient.delete<ApiResponse<null>>(
+      `${ApiAddresses.user}${ApiAddresses.delete}/${id}`
+    );
+  }
 }
