@@ -67,7 +67,6 @@ export class TransactionEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-
     this.loading.show();
 
     const id = this.route.snapshot.paramMap.get('id') ?? '';
