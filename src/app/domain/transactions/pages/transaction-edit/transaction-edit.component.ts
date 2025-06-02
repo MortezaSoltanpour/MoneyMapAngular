@@ -69,6 +69,7 @@ export class TransactionEditComponent implements OnInit {
     this.loadCategories();
 
     this.loading.show();
+    
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.service.getOne(id).subscribe({
       next: (response) => {
