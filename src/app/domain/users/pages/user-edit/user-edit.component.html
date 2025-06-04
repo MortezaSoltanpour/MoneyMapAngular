@@ -12,7 +12,7 @@
     <div class="col-md-6">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input formControlName="email" class="form-control" />
+        <input autofocus formControlName="email" class="form-control" />
       </div>
       <app-validation-messages
         [control]="pageForm.get('email')"

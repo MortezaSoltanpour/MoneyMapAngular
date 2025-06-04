@@ -35,7 +35,6 @@ export class CategoryServicesService {
     );
   }
   add(data: categoryDto) {
-    console.log(data);
     return this.httpClient.post(`${ApiAddresses.category}${ApiAddresses.add}`, {
       title: data.title,
       isInput: data.isInput,
