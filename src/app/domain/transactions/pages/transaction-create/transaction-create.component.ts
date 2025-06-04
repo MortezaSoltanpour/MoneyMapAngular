@@ -12,7 +12,7 @@ import { LoadingService } from '../../../../services/loading.service';
 import { CategoryServicesService } from '../../../categories/services/category-services.service';
 import { categoryDto } from '../../../categories/models/categoryDtos';
 import { finalize } from 'rxjs';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { TransactionServicesService } from '../../services/transaction-services.service';
 import { transactionDto } from '../../models/transactionDto';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
     MainTitleComponent,
     BreadcrumbComponent,
     ReactiveFormsModule,
+    CommonModule,
     NgFor,
     ValidationMessagesComponent,
   ],
@@ -67,6 +68,11 @@ export class TransactionCreateComponent {
       });
   }
 
+  getCurrentDateTimeString(): string {
+    const now = new Date();
+    return now.toISOString().slice(0, 10);
+  }
+
   pageForm = new FormGroup({
     Description: new FormControl('', [
       Validators.required,
@@ -79,7 +85,9 @@ export class TransactionCreateComponent {
     ]),
     IsInput: new FormControl(true),
     IdCategory: new FormControl('', [Validators.required]),
-    dateRegistered: new FormControl(null, [Validators.required]),
+    dateRegistered: new FormControl(this.getCurrentDateTimeString(), [
+      Validators.required,
+    ]),
   });
 
   transactionData: transactionDto = {
@@ -100,7 +108,10 @@ export class TransactionCreateComponent {
     this.transactionData.amount = formData.Amount ?? 0;
     this.transactionData.description = formData.Description ?? '0';
     this.transactionData.idCategory = formData.IdCategory ?? '0';
-    this.transactionData.dateRegistered = formData.dateRegistered ?? null;
+    this.transactionData.dateRegistered = new Date(
+      formData.dateRegistered ?? ''
+    );
+
     this.services
       .add(this.transactionData)
       .pipe(
