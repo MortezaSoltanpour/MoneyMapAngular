@@ -4,6 +4,7 @@ import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { UserDeleteComponent } from './pages/user-delete/user-delete.component';
 import { UserCreateComponent } from './pages/user-create/user-create.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 export const usersRoutes: Routes = [
   { path: '', component: UserListComponent, data: { title: 'Users' } },
@@ -18,5 +19,10 @@ export const usersRoutes: Routes = [
     path: 'delete/:id',
     component: UserDeleteComponent,
     data: { title: 'Users' },
+  },
+  {
+    path: 'changepassword',
+    component: ChangePasswordComponent,
+    data: { title: 'Change password' },
   },
 ];
