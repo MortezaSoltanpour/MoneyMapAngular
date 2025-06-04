@@ -9,4 +9,5 @@ export class ApiAddresses {
   static delete: string = '/delete';
   static all: string = '/all';
   static login: string = '/loginrequest';
+  static changePassword: string = '/changePassword';
 }

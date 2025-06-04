@@ -14,3 +14,8 @@ export interface Credentials {
 export interface TokenDto {
   jwt: string;
 }
+
+export interface ChangePasswordDto {
+  oldPassword: string;
+  newPassword: string;
+}

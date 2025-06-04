@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TokenDto, userDto } from '../models/usersDto';
+import { ChangePasswordDto, TokenDto, userDto } from '../models/usersDto';
 import { ApiAddresses } from '../../../shared/apiAddress';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../shared/models/api-response';
@@ -40,6 +40,13 @@ export class UserService {
   update(data: userDto) {
     return this.httpClient.post(
       `${ApiAddresses.user}${ApiAddresses.edit}`,
+      data
+    );
+  }
+
+  updatePassword(data: ChangePasswordDto) {
+    return this.httpClient.post(
+      `${ApiAddresses.user}${ApiAddresses.changePassword}`,
       data
     );
   }
