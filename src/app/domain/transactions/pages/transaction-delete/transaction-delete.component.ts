@@ -53,7 +53,6 @@ export class TransactionDeleteComponent implements OnInit {
   deleteData() {
     this.loading.show();
     const id = this.route.snapshot.paramMap.get('id') ?? '';
-    console.log('id', id);
     this.service
       .delete(id)
       .pipe(

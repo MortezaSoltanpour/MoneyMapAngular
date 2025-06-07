@@ -30,7 +30,6 @@ export class UserService {
   }
 
   add(data: userDto) {
-    console.log(JSON.stringify(data));
     return this.httpClient.post(
       `${ApiAddresses.user}${ApiAddresses.add}`,
       data
