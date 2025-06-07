@@ -56,7 +56,7 @@ export class TransactionListComponent
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
   categories: categoryDto[] = [];
-  idCategory: string[] = [''];
+  idCategory: string[] = [];
   transactions: transactionDto[] = [];
 
   calculateSums(): void {

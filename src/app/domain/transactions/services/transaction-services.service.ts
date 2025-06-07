@@ -19,9 +19,9 @@ export class TransactionServicesService {
     let params = new HttpParams();
     if (dateFrom) params = params.set('dtStart', dateFrom.toString());
     if (dateTo) params = params.set('dtEnd', dateTo.toString());
-    if (idCategory) {
+    if (idCategory && idCategory.length > 0)
       for (var cat of idCategory) params = params.append('idCategory', cat);
-    }
+
     return this.httpClient.get<ApiResponse<transactionDto[]>>(
       `${ApiAddresses.transaction}${ApiAddresses.all}`,
       { params }
