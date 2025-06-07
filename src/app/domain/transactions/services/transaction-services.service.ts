@@ -14,13 +14,14 @@ export class TransactionServicesService {
   get(
     dateFrom: Date | null = null,
     dateTo: Date | null = null,
-    idCategory: string | null = null
+    idCategory: string[] = []
   ): Observable<ApiResponse<transactionDto[]>> {
     let params = new HttpParams();
-    if (dateFrom !== null) params = params.set('dtStart', dateFrom.toString());
-    if (dateTo !== null) params = params.set('dtEnd', dateTo.toString());
-    if (idCategory !== null) params = params.set('idCategory', idCategory);
-
+    if (dateFrom) params = params.set('dtStart', dateFrom.toString());
+    if (dateTo) params = params.set('dtEnd', dateTo.toString());
+    if (idCategory) {
+      for (var cat of idCategory) params = params.append('idCategory', cat);
+    }
     return this.httpClient.get<ApiResponse<transactionDto[]>>(
       `${ApiAddresses.transaction}${ApiAddresses.all}`,
       { params }

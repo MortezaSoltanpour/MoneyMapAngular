@@ -34,8 +34,7 @@
   </div>
   <div class="col-md-5">
     <label for="catId">Type:</label>
-    <select [(ngModel)]="idCategory" id="catId" class="form-control">
-      <option selected value="">-- Select type of transaction --</option>
+    <select #selectElement multiple="multiple" class="form-control">
       <option *ngFor="let cat of categories" [value]="cat.idCategory">
         {{ cat.title }}
         {{ cat.isInput ? "+(Income)" : "-(Expense)" }}

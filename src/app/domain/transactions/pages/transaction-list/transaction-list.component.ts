@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   userSampleTableColumns,
   userSampleTableData,
@@ -15,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoryServicesService } from '../../../categories/services/category-services.service';
 import { categoryDto } from '../../../categories/models/categoryDtos';
 import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
+declare var $: any;
 
 @Component({
   selector: 'app-transaction-list',
@@ -29,7 +37,10 @@ import { ErrorMessageComponent } from '../../../../components/shared/error-messa
   ],
   templateUrl: './transaction-list.component.html',
 })
-export class TransactionListComponent implements OnInit {
+export class TransactionListComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  @ViewChild('selectElement') selectElement!: ElementRef;
   userTableColumns = userSampleTableColumns;
   userTableData = userSampleTableData;
   title = 'Transactions';
@@ -45,7 +56,7 @@ export class TransactionListComponent implements OnInit {
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
   categories: categoryDto[] = [];
-  idCategory: string | null = '';
+  idCategory: string[] = [''];
   transactions: transactionDto[] = [];
 
   calculateSums(): void {
@@ -60,6 +71,7 @@ export class TransactionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTransaction();
+    this.errors = [];
   }
   loadTransaction() {
     this.loading.show();
@@ -104,5 +116,21 @@ export class TransactionListComponent implements OnInit {
 
   handleFilter() {
     this.loadTransaction();
+  }
+
+  ngAfterViewInit() {
+    // Initialize Select2
+    $(this.selectElement.nativeElement).select2();
+
+    // Optional: Listen to change event
+    $(this.selectElement.nativeElement).on('change', (e: any) => {
+      const selectedValues = $(e.target).val(); // this is an array of selected values
+      this.idCategory = selectedValues;
+    });
+  }
+
+  ngOnDestroy() {
+    // Destroy Select2 instance to avoid memory leaks
+    $(this.selectElement.nativeElement).select2('destroy');
   }
 }
