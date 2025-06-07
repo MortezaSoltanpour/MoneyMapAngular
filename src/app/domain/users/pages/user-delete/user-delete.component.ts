@@ -7,6 +7,7 @@ import { LoadingService } from '../../../../services/loading.service';
 import { userDto } from '../../models/usersDto';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-user-delete',
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
     BreadcrumbComponent,
     CommonModule,
     RouterModule,
+    ErrorMessageComponent,
   ],
   templateUrl: './user-delete.component.html',
 })
@@ -24,7 +26,7 @@ export class UserDeleteComponent implements OnInit {
     email: '',
     fullname: '',
   };
-
+  errors: string[] = [];
   constructor(
     private route: ActivatedRoute,
     private service: UserService,
@@ -48,7 +50,7 @@ export class UserDeleteComponent implements OnInit {
           this.user = response.payLoad;
         },
         error: (err) => {
-          console.log(err);
+          this.errors = err.error.errorMessages;
         },
       });
   }
@@ -67,8 +69,8 @@ export class UserDeleteComponent implements OnInit {
         next: () => {
           this.router.navigate(['/financial/users']);
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }

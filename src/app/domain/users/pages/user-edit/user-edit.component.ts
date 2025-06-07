@@ -13,6 +13,7 @@ import {
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
 import { userDto } from '../../models/usersDto';
 import { finalize } from 'rxjs';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-user-edit',
@@ -21,6 +22,7 @@ import { finalize } from 'rxjs';
     ReactiveFormsModule,
     BreadcrumbComponent,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './user-edit.component.html',
 })
@@ -52,6 +54,7 @@ export class UserEditComponent implements OnInit {
     });
   }
   title = 'Create';
+  errors: string[] = [];
 
   userData: userDto = {
     email: '',
@@ -99,7 +102,7 @@ export class UserEditComponent implements OnInit {
           this.router.navigate(['/financial/users']);
         },
         error: (err) => {
-          console.log(err);
+          this.errors = err.error.errorMessages;
         },
       });
   }

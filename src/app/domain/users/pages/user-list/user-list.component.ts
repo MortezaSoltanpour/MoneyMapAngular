@@ -11,10 +11,17 @@ import { LoadingService } from '../../../../services/loading.service';
 import { finalize } from 'rxjs';
 import { NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-user-list',
-  imports: [RouterModule, NgFor, BreadcrumbComponent, MainTitleComponent],
+  imports: [
+    RouterModule,
+    NgFor,
+    BreadcrumbComponent,
+    MainTitleComponent,
+    ErrorMessageComponent,
+  ],
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent implements OnInit {
@@ -23,7 +30,7 @@ export class UserListComponent implements OnInit {
 
   title = 'Users';
   users: userDto[] = [];
-
+  errors: string[] = [];
   constructor(private service: UserService, private loading: LoadingService) {}
   ngOnInit(): void {
     this.loading.show();
@@ -39,7 +46,7 @@ export class UserListComponent implements OnInit {
           this.users = response.payLoad;
         },
         error: (err) => {
-          console.log(err);
+          this.errors = err.error.errorMessages;
         },
       });
   }
