@@ -48,8 +48,8 @@ export class UserEditComponent implements OnInit {
 
         this.loading.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errors = err.error.errorMessages;
       },
     });
   }

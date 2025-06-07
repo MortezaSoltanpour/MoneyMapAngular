@@ -65,8 +65,8 @@ export class TransactionCreateComponent {
               ?.setValue(this.categories[0].idCategory);
           }
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }
