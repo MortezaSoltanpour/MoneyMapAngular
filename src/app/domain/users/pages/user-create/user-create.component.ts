@@ -13,6 +13,7 @@ import {
 import { ValidationMessagesComponent } from '../../../../components/shared/validation-messages/validation-messages.component';
 import { userDto } from '../../models/usersDto';
 import { finalize } from 'rxjs';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-user-create',
@@ -21,6 +22,7 @@ import { finalize } from 'rxjs';
     ReactiveFormsModule,
     BreadcrumbComponent,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './user-create.component.html',
 })
@@ -31,6 +33,7 @@ export class UserCreateComponent {
     private loading: LoadingService
   ) {}
   title = 'Create';
+  errors: string[] = [];
 
   userData: userDto = {
     email: '',
@@ -83,7 +86,7 @@ export class UserCreateComponent {
           this.router.navigate(['/financial/users']);
         },
         error: (err) => {
-          console.log(err);
+          this.errors = err.error.errorMessages;
         },
       });
   }

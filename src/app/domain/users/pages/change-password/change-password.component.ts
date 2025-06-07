@@ -30,7 +30,6 @@ import { ErrorMessageComponent } from '../../../../components/shared/error-messa
 export class ChangePasswordComponent {
   title = 'Change password';
   errors: string[] = [];
-  hasError = false;
   pageForm = new FormGroup({
     oldPassword: new FormControl('', [
       Validators.required,
@@ -82,9 +81,7 @@ export class ChangePasswordComponent {
           this.router.navigate(['/financial/users']);
         },
         error: (err) => {
-          this.hasError = true;
           this.errors = err.error.errorMessages;
-          console.log(err.error.errorMessages);
         },
       });
   }
