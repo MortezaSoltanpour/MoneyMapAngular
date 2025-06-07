@@ -1,0 +1,8 @@
+<div *ngIf="hasError" class="alert alert-danger">
+  Please fix this error(s) and try again
+  <ul>
+    <li *ngFor="let item of errors">
+      {{ item }}
+    </li>
+  </ul>
+</div>

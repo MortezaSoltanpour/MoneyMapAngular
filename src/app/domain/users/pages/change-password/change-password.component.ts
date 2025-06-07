@@ -14,16 +14,16 @@ import { ChangePasswordDto } from '../../models/usersDto';
 import { finalize } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-change-password',
   imports: [
-    NgIf,
-    NgFor,
     MainTitleComponent,
     BreadcrumbComponent,
     ReactiveFormsModule,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './change-password.component.html',
 })
