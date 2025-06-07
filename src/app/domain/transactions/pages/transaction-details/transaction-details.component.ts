@@ -6,6 +6,7 @@ import { transactionDto } from '../../models/transactionDto';
 import { MainTitleComponent } from '../../../../components/common/main-title/main-title.component';
 import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
 import { CommonModule } from '@angular/common';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-transaction-details',
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MainTitleComponent,
     BreadcrumbComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './transaction-details.component.html',
 })
@@ -24,6 +26,7 @@ export class TransactionDetailsComponent implements OnInit {
     private loading: LoadingService
   ) {}
   title = 'Details';
+  errors: string[] = [];
 
   transactionData: transactionDto = {
     amount: 0,
@@ -40,8 +43,8 @@ export class TransactionDetailsComponent implements OnInit {
         this.transactionData = response.payLoad;
         this.loading.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errors = err.error.errorMessages;
       },
     });
   }

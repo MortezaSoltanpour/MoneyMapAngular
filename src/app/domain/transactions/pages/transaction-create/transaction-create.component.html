@@ -8,6 +8,7 @@
 ></app-breadcrumb>
 <form [formGroup]="pageForm" (ngSubmit)="handleSubmit()">
   <div class="row">
+    <app-error-message [errors]="errors"></app-error-message>
     <div class="col-md-6">
       <div class="mb-3">
         <div class="mb-3">

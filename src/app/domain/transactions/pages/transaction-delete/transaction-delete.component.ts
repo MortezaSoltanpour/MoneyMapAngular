@@ -7,6 +7,7 @@ import { MainTitleComponent } from '../../../../components/common/main-title/mai
 import { BreadcrumbComponent } from '../../../../components/common/breadcrumb/breadcrumb/breadcrumb.component';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-transaction-delete',
@@ -15,6 +16,7 @@ import { finalize } from 'rxjs';
     CommonModule,
     MainTitleComponent,
     BreadcrumbComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './transaction-delete.component.html',
 })
@@ -26,6 +28,7 @@ export class TransactionDeleteComponent implements OnInit {
     private loading: LoadingService
   ) {}
   title = 'Delete';
+  errors: string[] = [];
 
   transactionData: transactionDto = {
     amount: 0,
@@ -42,10 +45,10 @@ export class TransactionDeleteComponent implements OnInit {
         this.transactionData = response.payLoad;
         this.loading.hide();
       },
-      error: (error) => {
-        if (error.status === 404)
+      error: (err) => {
+        if (err.status === 404)
           this.router.navigate(['/financial/transactions']);
-        console.log(error);
+        this.errors = err.error.errorMessages;
       },
     });
   }
@@ -64,8 +67,8 @@ export class TransactionDeleteComponent implements OnInit {
         next: () => {
           this.router.navigate(['/financial/transactions']);
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }

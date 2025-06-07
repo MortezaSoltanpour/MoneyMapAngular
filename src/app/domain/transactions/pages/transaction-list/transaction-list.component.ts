@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CategoryServicesService } from '../../../categories/services/category-services.service';
 import { categoryDto } from '../../../categories/models/categoryDtos';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-transaction-list',
@@ -24,6 +25,7 @@ import { categoryDto } from '../../../categories/models/categoryDtos';
     FormsModule,
     BreadcrumbComponent,
     MainTitleComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './transaction-list.component.html',
 })
@@ -38,6 +40,7 @@ export class TransactionListComponent implements OnInit {
     private loading: LoadingService,
     private catService: CategoryServicesService
   ) {}
+  errors: string[] = [];
 
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
@@ -73,8 +76,8 @@ export class TransactionListComponent implements OnInit {
           this.transactions = response.payLoad;
           this.calculateSums();
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
     this.loadCategories();
@@ -93,8 +96,8 @@ export class TransactionListComponent implements OnInit {
         next: (response) => {
           this.categories = response.payLoad;
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }

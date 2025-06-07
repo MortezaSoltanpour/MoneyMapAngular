@@ -16,6 +16,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { TransactionServicesService } from '../../services/transaction-services.service';
 import { transactionDto } from '../../models/transactionDto';
 import { Router } from '@angular/router';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-transaction-create',
@@ -26,12 +27,14 @@ import { Router } from '@angular/router';
     CommonModule,
     NgFor,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './transaction-create.component.html',
 })
 export class TransactionCreateComponent {
   title = 'Create';
   categories: categoryDto[] = [];
+  errors: string[] = [];
 
   constructor(
     private catService: CategoryServicesService,
@@ -124,7 +127,7 @@ export class TransactionCreateComponent {
           this.router.navigate(['/financial/transactions']);
         },
         error: (err) => {
-          console.log(err);
+          this.errors = err.error.errorMessages;
         },
       });
   }

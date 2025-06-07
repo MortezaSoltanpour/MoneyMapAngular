@@ -16,6 +16,7 @@ import { NgFor } from '@angular/common';
 import { TransactionServicesService } from '../../services/transaction-services.service';
 import { transactionDto } from '../../models/transactionDto';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-transaction-edit',
@@ -25,6 +26,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     ReactiveFormsModule,
     NgFor,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './transaction-edit.component.html',
 })
@@ -38,6 +40,7 @@ export class TransactionEditComponent implements OnInit {
   ) {}
   title = 'Edit';
   categories: categoryDto[] = [];
+  errors: string[] = [];
 
   transactionData: transactionDto = {
     amount: 0,
@@ -69,7 +72,7 @@ export class TransactionEditComponent implements OnInit {
     this.loadCategories();
 
     this.loading.show();
-    
+
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.service.getOne(id).subscribe({
       next: (response) => {
@@ -88,8 +91,8 @@ export class TransactionEditComponent implements OnInit {
         });
         this.loading.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errors = err.error.errorMessages;
       },
     });
   }
@@ -118,8 +121,8 @@ export class TransactionEditComponent implements OnInit {
               ?.setValue(this.categories[0].idCategory);
           }
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }
@@ -151,7 +154,7 @@ export class TransactionEditComponent implements OnInit {
           this.router.navigate(['/financial/transactions']);
         },
         error: (err) => {
-          console.log(err);
+          this.errors = err.error.errorMessages;
         },
       });
   }
