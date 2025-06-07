@@ -13,6 +13,7 @@ import { CategoryServicesService } from '../../services/category-services.servic
 import { categoryDto } from '../../models/categoryDtos';
 import { LoadingService } from '../../../../services/loading.service';
 import { finalize } from 'rxjs';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-category-create',
@@ -22,6 +23,7 @@ import { finalize } from 'rxjs';
     RouterModule,
     MainTitleComponent,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './category-create.component.html',
 })
@@ -32,6 +34,7 @@ export class CategoryCreateComponent {
     private loading: LoadingService
   ) {}
   title = 'Create';
+  errors: string[] = [];
 
   pageForm = new FormGroup({
     Title: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -72,8 +75,8 @@ export class CategoryCreateComponent {
         next: () => {
           this.router.navigate(['/financial/categories']);
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }

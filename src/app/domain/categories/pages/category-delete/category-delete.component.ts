@@ -8,13 +8,22 @@ import { categoryDto } from '../../models/categoryDtos';
 import { FormsModule } from '@angular/forms';
 import { LoadingService } from '../../../../services/loading.service';
 import { finalize } from 'rxjs';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-category-delete',
-  imports: [MainTitleComponent, BreadcrumbComponent, NgIf, FormsModule],
+  imports: [
+    MainTitleComponent,
+    BreadcrumbComponent,
+    NgIf,
+    FormsModule,
+    ErrorMessageComponent,
+  ],
   templateUrl: './category-delete.component.html',
 })
 export class CategoryDeleteComponent {
+  errors: string[] = [];
+
   deleteData() {
     this.loading.show();
     const id = this.route.snapshot.paramMap.get('id') ?? '';
@@ -29,8 +38,8 @@ export class CategoryDeleteComponent {
         next: () => {
           this.router.navigate(['/financial/categories']);
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }
@@ -56,8 +65,8 @@ export class CategoryDeleteComponent {
         this.category = response.payLoad;
         this.loading.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errors = err.error.errorMessages;
       },
     });
   }

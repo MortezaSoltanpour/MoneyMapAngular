@@ -14,6 +14,7 @@ import { categoryDto } from '../../models/categoryDtos';
 import { LoadingService } from '../../../../services/loading.service';
 import { NgIf } from '@angular/common';
 import { finalize } from 'rxjs';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-category-edit',
@@ -23,11 +24,13 @@ import { finalize } from 'rxjs';
     RouterModule,
     MainTitleComponent,
     ValidationMessagesComponent,
+    ErrorMessageComponent,
   ],
   templateUrl: './category-edit.component.html',
 })
 export class CategoryEditComponent implements OnInit {
   title = 'Edit';
+  errors: string[] = [];
 
   constructor(
     private service: CategoryServicesService,
@@ -107,8 +110,8 @@ export class CategoryEditComponent implements OnInit {
         next: () => {
           this.router.navigate(['/financial/categories']);
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          this.errors = err.error.errorMessages;
         },
       });
   }

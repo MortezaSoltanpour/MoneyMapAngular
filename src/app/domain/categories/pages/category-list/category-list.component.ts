@@ -7,10 +7,18 @@ import { categoryDto } from '../../models/categoryDtos';
 import { CategoryServicesService } from '../../services/category-services.service';
 import { NgFor, NgIf } from '@angular/common';
 import { LoadingService } from '../../../../services/loading.service';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-category-list',
-  imports: [NgIf, BreadcrumbComponent, RouterModule, MainTitleComponent, NgFor],
+  imports: [
+    NgIf,
+    BreadcrumbComponent,
+    RouterModule,
+    MainTitleComponent,
+    NgFor,
+    ErrorMessageComponent,
+  ],
   templateUrl: './category-list.component.html',
 })
 export class CategoryListComponent implements OnInit {
@@ -18,6 +26,10 @@ export class CategoryListComponent implements OnInit {
     private service: CategoryServicesService,
     private loading: LoadingService
   ) {}
+  errors: string[] = [];
+  title = 'Categories';
+  categories: categoryDto[] = [];
+
   ngOnInit(): void {
     this.loading.show();
     this.service.get().subscribe({
@@ -25,13 +37,9 @@ export class CategoryListComponent implements OnInit {
         this.categories = response.payLoad;
         this.loading.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errors = err.error.errorMessages;
       },
     });
   }
-
-  title = 'Categories';
-
-  categories: categoryDto[] = [];
 }

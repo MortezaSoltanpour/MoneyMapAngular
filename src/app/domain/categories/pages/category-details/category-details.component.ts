@@ -6,10 +6,16 @@ import { categoryDto } from '../../models/categoryDtos';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { LoadingService } from '../../../../services/loading.service';
+import { ErrorMessageComponent } from '../../../../components/shared/error-message/error-message.component';
 
 @Component({
   selector: 'app-category-details',
-  imports: [MainTitleComponent, BreadcrumbComponent, NgIf],
+  imports: [
+    MainTitleComponent,
+    BreadcrumbComponent,
+    NgIf,
+    ErrorMessageComponent,
+  ],
   templateUrl: './category-details.component.html',
 })
 export class CategoryDetailsComponent implements OnInit {
@@ -18,6 +24,8 @@ export class CategoryDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private loading: LoadingService
   ) {}
+  errors: string[] = [];
+  title = 'Details';
 
   category: categoryDto = {
     idCategory: '',
@@ -34,10 +42,9 @@ export class CategoryDetailsComponent implements OnInit {
         this.category = response.payLoad;
         this.loading.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: (err) => {
+        this.errors = err.error.errorMessages;
       },
     });
   }
-  title = 'Details';
 }
