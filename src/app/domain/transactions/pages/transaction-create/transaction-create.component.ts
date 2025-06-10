@@ -35,6 +35,7 @@ export class TransactionCreateComponent {
   title = 'Create';
   categories: categoryDto[] = [];
   errors: string[] = [];
+  fileToUpload: File | null = null;
 
   constructor(
     private catService: CategoryServicesService,
@@ -108,15 +109,15 @@ export class TransactionCreateComponent {
 
     const formData = this.pageForm.value;
 
-    this.transactionData.amount = formData.Amount ?? 0;
-    this.transactionData.description = formData.Description ?? '0';
-    this.transactionData.idCategory = formData.IdCategory ?? '0';
-    this.transactionData.dateRegistered = new Date(
-      formData.dateRegistered ?? ''
-    );
+    const transaction: transactionDto = {
+      amount: formData.Amount ?? 0,
+      description: formData.Description ?? '',
+      idCategory: formData.IdCategory ?? '',
+      dateRegistered: new Date(formData.dateRegistered ?? ''),
+    };
 
     this.services
-      .add(this.transactionData)
+      .add(transaction, this.fileToUpload ?? undefined)
       .pipe(
         finalize(() => {
           this.loading.hide();
@@ -128,7 +129,15 @@ export class TransactionCreateComponent {
         },
         error: (err) => {
           this.errors = err.error.errorMessages;
+          console.log(err);
         },
       });
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fileToUpload = input.files[0];
+    }
   }
 }

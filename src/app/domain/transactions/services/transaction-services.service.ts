@@ -39,11 +39,31 @@ export class TransactionServicesService {
       `${ApiAddresses.transaction}${ApiAddresses.delete}/${id}`
     );
   }
-  add(data: transactionDto) {
+  add(transaction: transactionDto, file?: File) {
+    const formData = new FormData();
+
+    formData.append('description', transaction.description);
+    formData.append('idCategory', transaction.idCategory);
+    formData.append(
+      'dateRegistered',
+      transaction.dateRegistered?.toISOString() ?? ''
+    );
+
+    formData.append('amount', transaction.amount.toString());
+
+    if (file) {
+      formData.append('file', file);
+    }
+
     return this.httpClient.post(
       `${ApiAddresses.transaction}${ApiAddresses.add}`,
-      data
+      formData
     );
+
+    // return this.httpClient.post(
+    //   `${ApiAddresses.transaction}${ApiAddresses.add}`,
+    //   data
+    // );
   }
 
   update(data: transactionDto) {

@@ -99,6 +99,22 @@
         ></app-validation-messages>
       </div>
     </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="dateRegistered" class="form-label">Attachment </label>
+        <input
+          type="file"
+          (change)="onFileChange($event)"
+          class="form-control"
+        />
+
+        <app-validation-messages
+          [control]="pageForm.get('dateRegistered')"
+          label="file"
+        ></app-validation-messages>
+      </div>
+    </div>
   </div>
   <div></div>
   <button type="submit" class="btn btn-success">Submit</button>
