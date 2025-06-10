@@ -41,6 +41,7 @@ export class TransactionEditComponent implements OnInit {
   title = 'Edit';
   categories: categoryDto[] = [];
   errors: string[] = [];
+  fileToUpload: File | null = null;
 
   transactionData: transactionDto = {
     amount: 0,
@@ -136,14 +137,16 @@ export class TransactionEditComponent implements OnInit {
 
     const formData = this.pageForm.value;
 
-    this.transactionData.amount = formData.Amount ?? 0;
-    this.transactionData.description = formData.Description ?? '0';
-    this.transactionData.idCategory = formData.IdCategory ?? '0';
-    this.transactionData.dateRegistered = formData.dateRegistered
-      ? new Date(formData.dateRegistered)
-      : null;
+    const transaction: transactionDto = {
+      idTransaction: this.transactionData.idTransaction ?? '',
+      amount: formData.Amount ?? 0,
+      description: formData.Description ?? '',
+      idCategory: formData.IdCategory ?? '',
+      dateRegistered: new Date(formData.dateRegistered ?? ''),
+    };
+
     this.service
-      .update(this.transactionData)
+      .update(transaction, this.fileToUpload ?? undefined)
       .pipe(
         finalize(() => {
           this.loading.hide();
@@ -154,8 +157,16 @@ export class TransactionEditComponent implements OnInit {
           this.router.navigate(['/financial/transactions']);
         },
         error: (err) => {
+          console.log(err);
           this.errors = err.error.errorMessages;
         },
       });
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fileToUpload = input.files[0];
+    }
   }
 }

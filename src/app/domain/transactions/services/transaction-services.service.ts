@@ -59,17 +59,30 @@ export class TransactionServicesService {
       `${ApiAddresses.transaction}${ApiAddresses.add}`,
       formData
     );
-
-    // return this.httpClient.post(
-    //   `${ApiAddresses.transaction}${ApiAddresses.add}`,
-    //   data
-    // );
   }
 
-  update(data: transactionDto) {
+  update(transaction: transactionDto, file?: File) {
+    const formData = new FormData();
+
+    formData.append('idTransaction', transaction.idTransaction ?? '');
+    formData.append('description', transaction.description);
+    formData.append('idCategory', transaction.idCategory);
+    formData.append(
+      'dateRegistered',
+      transaction.dateRegistered?.toISOString() ?? ''
+    );
+
+    formData.append('amount', transaction.amount.toString());
+
+    if (file) {
+      formData.append('file', file);
+    }
+
+    console.log(formData);
+
     return this.httpClient.post(
       `${ApiAddresses.transaction}${ApiAddresses.edit}`,
-      data
+      formData
     );
   }
 }
