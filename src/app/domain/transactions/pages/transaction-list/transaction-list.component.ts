@@ -133,4 +133,16 @@ export class TransactionListComponent
     // Destroy Select2 instance to avoid memory leaks
     $(this.selectElement.nativeElement).select2('destroy');
   }
+
+  sortDirection: { [key: string]: boolean } = {};
+
+  sortColumns(field: keyof transactionDto) {
+    const direction = (this.sortDirection[field] = !this.sortDirection[field]);
+
+    this.transactions.sort((a, b) => {
+      if (a[field]! < b[field]!) return direction ? -1 : 1;
+      if (a[field]! > b[field]!) return direction ? 1 : -1;
+      return 0;
+    });
+  }
 }

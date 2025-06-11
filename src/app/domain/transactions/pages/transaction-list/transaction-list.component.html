@@ -52,11 +52,31 @@
   <thead>
     <tr>
       <td>#</td>
-      <td>Description</td>
-      <td>Amount</td>
-      <td>Category</td>
-      <td>Type</td>
-      <td>Date</td>
+      <td>
+        <span (click)="sortColumns('description')" style="cursor: pointer">
+          Description
+        </span>
+      </td>
+      <td>
+        <span (click)="sortColumns('amount')" style="cursor: pointer">
+          Amount
+        </span>
+      </td>
+      <td>
+        <span (click)="sortColumns('category')" style="cursor: pointer">
+          Category
+        </span>
+      </td>
+      <td>
+        <span (click)="sortColumns('isInput')" style="cursor: pointer">
+          Type
+        </span>
+      </td>
+      <td>
+        <span (click)="sortColumns('dateRegistered')" style="cursor: pointer">
+          Date
+        </span>
+      </td>
       <th></th>
     </tr>
   </thead>
