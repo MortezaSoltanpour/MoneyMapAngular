@@ -43,8 +43,6 @@ export class LoginComponent {
     this.isLoading = true;
     const formData = this.loginForm.value;
 
-    console.log(formData.rememberMe);
-
     let credential: Credentials = {
       email: formData.email ?? '',
       password: formData.password ?? '',
@@ -61,6 +59,7 @@ export class LoginComponent {
         next: () => {
           this.router.navigate(['/financial/transactions']);
           if (formData.rememberMe) {
+            localStorage.setItem('remember', 'true');
           }
         },
         error: (err) => {
