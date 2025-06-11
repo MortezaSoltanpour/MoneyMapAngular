@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -16,6 +17,7 @@ import { NgIf } from '@angular/common';
   selector: 'app-login',
   imports: [
     NgIf,
+    FormsModule,
     RouterModule,
     ReactiveFormsModule,
     ValidationMessagesComponent,
@@ -27,6 +29,7 @@ export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
+    rememberMe: new FormControl(false),
   });
 
   constructor(private auth: AuthService, private router: Router) {}
@@ -39,6 +42,8 @@ export class LoginComponent {
     }
     this.isLoading = true;
     const formData = this.loginForm.value;
+
+    console.log(formData.rememberMe);
 
     let credential: Credentials = {
       email: formData.email ?? '',
@@ -53,7 +58,11 @@ export class LoginComponent {
         })
       )
       .subscribe({
-        next: () => this.router.navigate(['/financial/transactions']),
+        next: () => {
+          this.router.navigate(['/financial/transactions']);
+          if (formData.rememberMe) {
+          }
+        },
         error: (err) => {
           alert('Login failed');
         },
