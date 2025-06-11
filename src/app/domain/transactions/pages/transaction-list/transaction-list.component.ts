@@ -134,14 +134,22 @@ export class TransactionListComponent
     $(this.selectElement.nativeElement).select2('destroy');
   }
 
-  sortDirection: { [key: string]: boolean } = {};
+  sortField: keyof transactionDto | null = 'dateRegistered';
+  sortAsc: boolean = true;
 
   sortColumns(field: keyof transactionDto) {
-    const direction = (this.sortDirection[field] = !this.sortDirection[field]);
+    if (this.sortField === field) {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortField = field;
+      this.sortAsc = true;
+    }
 
     this.transactions.sort((a, b) => {
-      if (a[field]! < b[field]!) return direction ? -1 : 1;
-      if (a[field]! > b[field]!) return direction ? 1 : -1;
+      const valA = a[field] ?? '';
+      const valB = b[field] ?? '';
+      if (valA < valB) return this.sortAsc ? -1 : 1;
+      if (valA > valB) return this.sortAsc ? 1 : -1;
       return 0;
     });
   }

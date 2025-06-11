@@ -55,26 +55,46 @@
       <td>
         <span (click)="sortColumns('description')" style="cursor: pointer">
           Description
+          <i
+            *ngIf="sortField === 'description'"
+            [ngClass]="['fa', sortAsc ? 'fa-arrow-down' : 'fa-arrow-up']"
+          ></i>
         </span>
       </td>
       <td>
         <span (click)="sortColumns('amount')" style="cursor: pointer">
           Amount
+          <i
+            *ngIf="sortField === 'amount'"
+            [ngClass]="['fa', sortAsc ? 'fa-arrow-down' : 'fa-arrow-up']"
+          ></i>
         </span>
       </td>
       <td>
         <span (click)="sortColumns('category')" style="cursor: pointer">
           Category
+          <i
+            *ngIf="sortField === 'category'"
+            [ngClass]="['fa', sortAsc ? 'fa-arrow-down' : 'fa-arrow-up']"
+          ></i>
         </span>
       </td>
       <td>
         <span (click)="sortColumns('isInput')" style="cursor: pointer">
           Type
+          <i
+            *ngIf="sortField === 'isInput'"
+            [ngClass]="['fa', sortAsc ? 'fa-arrow-down' : 'fa-arrow-up']"
+          ></i>
         </span>
       </td>
       <td>
         <span (click)="sortColumns('dateRegistered')" style="cursor: pointer">
           Date
+          <i
+            *ngIf="sortField === 'dateRegistered'"
+            [ngClass]="['fa', sortAsc ? 'fa-arrow-down' : 'fa-arrow-up']"
+          ></i>
         </span>
       </td>
       <th></th>
