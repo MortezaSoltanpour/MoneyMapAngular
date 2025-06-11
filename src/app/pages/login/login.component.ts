@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import {
@@ -25,7 +25,7 @@ import { NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -33,6 +33,10 @@ export class LoginComponent {
   });
 
   constructor(private auth: AuthService, private router: Router) {}
+  ngOnInit(): void {
+    let token = localStorage.getItem('access_token');
+    if (token) this.router.navigate(['/financial/transactions']);
+  }
   isLoading = false;
   onSubmit() {
     if (this.loginForm.invalid) {
