@@ -8,7 +8,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Skip login or refresh requests
   if (req.url.includes('/auth/login') || req.url.includes('/auth/refresh')) {
     return next(req);
   }
