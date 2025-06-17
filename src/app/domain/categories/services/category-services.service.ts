@@ -34,6 +34,7 @@ export class CategoryServicesService {
       `${ApiAddresses.category}${ApiAddresses.delete}/${id}`
     );
   }
+
   add(data: categoryDto) {
     return this.httpClient.post(`${ApiAddresses.category}${ApiAddresses.add}`, {
       title: data.title,
