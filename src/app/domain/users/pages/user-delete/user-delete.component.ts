@@ -77,7 +77,7 @@ export class UserDeleteComponent implements OnInit {
 
   confirmDelete(event: Event) {
     event.preventDefault();
-    if (confirm('Are you sure you want to delete this user?')) {
+    if (confirm('Are you sure you want to delete this user ?')) {
       this.deleteData();
     }
   }
